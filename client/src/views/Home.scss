@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+.home {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 $pagePadding;
+}
+.featuredProducts {
+  grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  padding: 4em 0;
+  border-bottom: 1px solid #dee2e6;
+  margin: 4em 0 6em;
+  gap: 1em;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (max-width: 440px) {
+    grid-template-columns: 1fr;
+  }
+}

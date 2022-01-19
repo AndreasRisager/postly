@@ -1,0 +1,32 @@
+.product {
+  &:hover &__image {
+    filter: contrast(1.2) saturate(1.5);
+  }
+  &__image {
+    transition: filter 600ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    vertical-align: middle;
+    margin-bottom: 15px;
+  }
+  &__name {
+    text-align: center;
+    font-size: 1.05em;
+    color: #000;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+  }
+  &__price {
+    color: #1c1d1d;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  &__button {
+    margin-top: 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+}
