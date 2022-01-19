@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
@@ -11,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log("App is running on port", process.env.PORT || 8080);
 });
 
