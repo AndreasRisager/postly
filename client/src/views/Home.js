@@ -5,6 +5,7 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import { SliderData } from "../components/SliderData";
 import "./Home.scss";
+import products from "../items.json";
 
 export default function Home() {
   return (
@@ -13,7 +14,9 @@ export default function Home() {
       <ImageSlider slides={SliderData} />
       <main className="home">
         <section className="featuredProducts">
-          <Product />
+          {products.map((product) => (
+            <Product product={product} key={product.id} />
+          ))}
         </section>
       </main>
       <Newsletter />

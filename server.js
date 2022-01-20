@@ -2,7 +2,6 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
-const uuid = require("uuid/v4");
 
 const app = express();
 
@@ -13,52 +12,46 @@ app.listen(process.env.PORT || 8080, function () {
   console.log("App is running on port", process.env.PORT || 8080);
 });
 
-app.get("/", (req, res) => {
-  res.send("STRIPE PAYMENT");
+app.get("/v1/products", async (req, res) => {
+  const products = await stripe.products.list({
+    limit: 4,
+  });
+
+  res.send(products);
+});
+
+// Fetch the Checkout Session to display the JSON result on the success page
+app.get("/checkout-success", async (req, res) => {
+  const { sessionId } = req.query;
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  res.send(session);
 });
 
 app.post("/checkout", async (req, res) => {
-  console.log("Request:", req.body);
+  const domainURL = process.env.DOMAIN;
 
-  let error;
-  let status;
-  try {
-    const { token, cart, totalPrice } = req.body;
+  const { quantity } = req.body;
 
-    const customer = await stripe.customers.create({
-      email: token.email,
-      source: token.id,
-    });
-
-    const idempotency_key = uuid();
-    const charge = await stripe.charges.create(
+  // Create new Checkout Session for the order
+  // Other optional params include:
+  // [billing_address_collection] - to display billing address details on the page
+  // [customer] - if you have an existing Stripe Customer ID
+  // [customer_email] - lets you prefill the email input in the Checkout page
+  // [automatic_tax] - to automatically calculate sales tax, VAT and GST in the checkout page
+  // For full details see https://stripe.com/docs/api/checkout/sessions/create
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [
       {
-        amount: totalPrice * 100,
-        currency: "dkk",
-        customer: customer.id,
-        receipt_email: token.email,
-        description: `Purchased the something`,
-        shipping: {
-          name: token.card.name,
-          address: {
-            line1: token.card.address_line1,
-            line2: token.card.address_line2,
-            city: token.card.address_city,
-            country: token.card.address_country,
-            postal_code: token.card.address_zip,
-          },
-        },
+        price: process.env.PRICE,
+        quantity: quantity,
       },
-      {
-        idempotency_key,
-      }
-    );
-    console.log("Charge:", { charge });
-    status = "success";
-  } catch (error) {
-    console.error("Error:", error);
-    status = "failure";
-  }
+    ],
+    // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+    success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${domainURL}/canceled.html`,
+    // automatic_tax: {enabled: true},
+  });
 
-  res.json({ error, status });
+  return res.redirect(303, session.url);
 });

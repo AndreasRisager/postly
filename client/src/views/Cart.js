@@ -3,22 +3,9 @@ import SiteFooter from "../components/SiteFooter";
 import { useCart } from "../helpers/CartContext";
 import "./Cart.scss";
 import { Link } from "@reach/router";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
 
 export default function Cart() {
-  const { cart, isCartEmpty, removeFromCart, totalPrice, updateItemQuantity, checkout } = useCart();
-
-  async function handleToken(token, addresses) {
-    const response = await axios.post("http://localhost:8080/checkout", { token, cart, totalPrice });
-    const { status } = response.data;
-    console.log("Response:", response.data);
-    if (status === "success") {
-      alert("Success! Check email for details", { type: "success" });
-    } else {
-      alert("Something went wrong", { type: "error" });
-    }
-  }
+  const { cart, isCartEmpty, removeFromCart, totalPrice, updateItemQuantity } = useCart();
 
   if (isCartEmpty)
     return (
@@ -96,19 +83,11 @@ export default function Cart() {
             <Link to="/shop" className="cartCheckout__shop">
               Shop mere
             </Link>
-            <button className="cartCheckout__checkout" onClick={checkout}>
+            <Link to="/checkout" className="cartCheckout__checkout">
               Til kassen
-            </button>
+            </Link>
           </div>
         </section>
-        <StripeCheckout
-          stripeKey="pk_test_51KJOszIj4eKOJ7cWA4DXFTUzgHagumD73V2wyBTC4T6uKTAPOh3jTto0odReDAEwjukRVX1LEuqarK32Zb8XrZrT001Y1to1N7"
-          token={handleToken}
-          amount={totalPrice.toFixed(2) * 100}
-          name="Postly"
-          billingAddress
-          shippingAddress
-        />
       </main>
       <SiteFooter />
     </>
