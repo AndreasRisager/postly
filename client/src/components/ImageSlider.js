@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function ImageSlider({ slides }) {
   var settings = {
+    arrows: false,
     dots: true,
     infinite: true,
     speed: 500,
@@ -14,14 +15,6 @@ export default function ImageSlider({ slides }) {
     autoplaySpeed: 5000,
     pauseOnFocus: true,
     pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 650,
-        settings: {
-          arrows: false,
-        },
-      },
-    ],
   };
 
   return (

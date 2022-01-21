@@ -7,17 +7,20 @@
     }
   }
 }
+
+@media only screen and (min-width: 1280px) {
+  .slick-slide div div img {
+    height: calc(100vh - 172.7px);
+    max-height: 800px;
+    width: auto;
+    margin: 0 auto;
+  }
+}
+.slick-slide div {
+  outline: none;
+}
 .slick-slider {
   position: relative;
-  .slick-arrow {
-    z-index: 1;
-  }
-  .slick-next {
-    right: 10px;
-  }
-  .slick-prev {
-    left: 10px;
-  }
   .slick-list {
     // border-radius: 10px;
     div {
