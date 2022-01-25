@@ -1,4 +1,9 @@
+@import "../variables.scss";
+
 .productView {
+  max-width: 1240px;
+  margin: 3em auto;
+  padding: 0 $pagePadding;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   &__content {
