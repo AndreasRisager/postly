@@ -84,7 +84,12 @@ export default function Shop() {
                 under 500 kr
               </button>
             </div>
-            <button className="shopFilter__clear" onClick={() => (setPriceLimit(undefined), setCategory(undefined))}>
+            <button
+              className="shopFilter__clear"
+              onClick={() => {
+                setPriceLimit(undefined);
+                setCategory(undefined);
+              }}>
               Fjern filtre
             </button>
           </div>
