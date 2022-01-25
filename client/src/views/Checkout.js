@@ -1,28 +1,63 @@
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
+import { useCart } from "../helpers/CartContext";
 import "./Checkout.scss";
 
-const stripePromise = loadStripe("pk_test_51KJOszIj4eKOJ7cWA4DXFTUzgHagumD73V2wyBTC4T6uKTAPOh3jTto0odReDAEwjukRVX1LEuqarK32Zb8XrZrT001Y1to1N7");
+// const stripePromise = loadStripe(process.env.STRIPE_PUBLIC);
 
 export default function Checkout() {
-  const handleClick = async (event) => {
-    // When the customer clicks on the button, redirect them to Checkout.
-    const stripe = await stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      lineItems: [
-        {
-          price: "price_1KJP1dIj4eKOJ7cWjUCyCRw5", // Replace with the ID of your price
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      successUrl: "https://example.com/success",
-      cancelUrl: "https://example.com/cancel",
-    });
-    console.log(error);
-  };
+  const { totalPrice } = useCart();
+
+  // const handleSubmit = async (event, elements, stripe) => {
+  //   event.preventDefault();
+
+  //   if (isCartEmpty || !stripe || !elements) return;
+
+  //   const cardElement = elements.getElement(CardElement);
+
+  //   const { error, paymentMethod } = await stripe.createPaymentMethod({ type: "card", card: cardElement });
+
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     const orderData = {
+  //       line_items: cart,
+  //       customer: {
+  //         firstname: "john",
+  //         lastname: "doe",
+  //         email: "johndoe@gmail.com",
+  //       },
+  //       shipping: {
+  //         name: "Primary",
+  //         street: "address1",
+  //         town_city: "city",
+  //         postal_zip_code: "4345",
+  //         country: "Denmark",
+  //       },
+  //       fulfillment: {
+  //         shipping_method: "shippingOption",
+  //       },
+  //       payment: {
+  //         gateway: "stripe",
+  //         stripe: {
+  //           payment_method_id: paymentMethod.id,
+  //         },
+  //       },
+  //     };
+  //   }
+  // };
   return (
-    <button role="link" onClick={handleClick}>
-      Checkout
-    </button>
+    <button>Betal {totalPrice}</button>
+    // <Elements stripe={stripePromise}>
+    //   <ElementsConsumer>
+    //     {({ elements, stripe }) => (
+    //       <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+    //         <CardElement />
+    //         <br /> <br />
+    //         <button>Betal {totalPrice}</button>
+    //       </form>
+    //     )}
+    //   </ElementsConsumer>
+    // </Elements>
   );
 }

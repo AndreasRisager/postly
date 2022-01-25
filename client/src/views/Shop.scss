@@ -7,9 +7,13 @@
   margin: 3em auto;
   max-width: 1240px;
   padding: 0 $pagePadding;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 .shopFilter {
   color: #3d4246;
+  max-width: 200px;
   &__content {
     position: sticky;
     top: 1em;
@@ -65,10 +69,10 @@
   display: grid;
   grid-template-columns: auto auto 1fr auto;
   align-items: center;
-  grid-gap: 1.8em;
+  grid-gap: 0.5em 1.8em;
   &__views {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 24px 24px;
     column-gap: 0.5rem;
   }
   &__view {
@@ -103,22 +107,24 @@
       font-size: 1em;
     }
   }
+  @media only screen and (max-width: 515px) {
+    grid-template-columns: 1fr;
+  }
 }
 .shopProducts {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 2em 1.5em;
   margin-top: 2em;
-  list-style: none;
   .shopProduct {
     text-transform: capitalize;
     text-align: center;
     &__name {
-        font-size: 1em;
-        font-weight: 500;
+      font-size: 1em;
+      font-weight: 500;
     }
     &__price {
-        margin: 0.5em 0;
+      margin: 0.5em 0;
     }
   }
 }

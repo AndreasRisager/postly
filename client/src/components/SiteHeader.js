@@ -13,7 +13,7 @@ export default function SiteHeader() {
       <header className="siteHeader">
         <nav className="siteHeader__navigation">
           <Link to="/" className="siteHeader__logo">
-            <img src="./images/logo.png" alt="postly logo" />
+            <img src="https://res.cloudinary.com/dffpafuyg/image/upload/v1643112043/logo_rzl0ec.png" alt="postly logo" />
           </Link>
           <div className="siteHeader__menu">
             <button aria-label="open search">

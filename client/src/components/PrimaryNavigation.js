@@ -21,7 +21,7 @@ export default function PrimaryNavigation({ open }) {
           <Link to="/">Nyhedsbrev</Link>
         </li>
         <li>
-          <Link to="/">Om Ugeplan.dk</Link>
+          <Link to="/">Om Postly.dk</Link>
         </li>
         <li>
           <Link to="/">Kontakt</Link>

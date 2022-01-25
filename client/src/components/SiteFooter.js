@@ -6,9 +6,9 @@ export default function SiteFooter() {
     <footer className="siteFooter">
       <div className="siteFooter__content">
         <div className="siteFooter__column">
-          <h4 className="siteFooter__title">Ugeplan.dk</h4>
+          <h4 className="siteFooter__title">Postly.dk</h4>
           <p className="siteFooter__text">
-            Ugeplan.dk
+            Postly.dk
             <br />
             Egøjevej 12
             <br />
@@ -16,20 +16,16 @@ export default function SiteFooter() {
           </p>
           <p className="siteFooter__text">CVR. nr. 34834245</p>
           <p className="siteFooter__subtitle">Presse </p>
-          <a href="mailto:kontakt@ugeplan.dk" className="siteFooter__link" title="mailto:kontakt@ugeplan.dk" aria-describedby="a11y-external-message">
-            kontakt@ugeplan.dk
+          <a href="mailto:kontakt@postly.dk" className="siteFooter__link" title="mailto:kontakt@postly.dk" aria-describedby="a11y-external-message">
+            kontakt@postly.dk
           </a>
         </div>
         <div className="siteFooter__column">
           <h4 className="siteFooter__title">Kundeservice</h4>
           <p className="siteFooter__text">
             Kontakt mig gerne på <br />
-            <a
-              href="mailto:kontakt@ugeplan.dk"
-              className="siteFooter__link"
-              title="mailto:kontakt@ugeplan.dk"
-              aria-describedby="a11y-external-message">
-              kontakt@ugeplan.dk
+            <a href="mailto:kontakt@postly.dk" className="siteFooter__link" title="mailto:kontakt@postly.dk" aria-describedby="a11y-external-message">
+              kontakt@postly.dk
             </a>
           </p>
           <p className="siteFooter__text">Jeg besvarer din mail indenfor 24 timer, mandag til fredag.</p>
@@ -83,7 +79,7 @@ export default function SiteFooter() {
             </Link>
           </li>
         </ul>
-        <p className="siteFooter__text">&copy; 2022, Ugeplan.dk</p>
+        <p className="siteFooter__text">&copy; 2022, Postly.dk</p>
       </div>
     </footer>
   );

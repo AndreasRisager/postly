@@ -1,0 +1,17 @@
+.productView {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  &__content {
+    padding: 1em;
+  }
+  &__title {
+    margin-bottom: 0.3em;
+  }
+  &__price {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+  }
+  &__description {
+    white-space: pre-wrap;
+  }
+}

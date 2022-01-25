@@ -36,14 +36,13 @@ export default function Cart() {
           {cart.map((item) => (
             <article className="cartProduct" key={item.id}>
               <div className="cartProduct__product">
-                <img src={item.image} alt={item.name} className="cartProduct__image" />
+                <img src={item.image?.url} alt={item.title} className="cartProduct__image" />
                 <div className="cartProduct__info">
-                  <h3 className="cartProduct__title">{item.name}</h3>
-                  <p className="cartProduct__description">1. Vælg den ønskede størrelse:: 70 x 100 cm</p>
-                  <p className="cartProduct__description">
-                    Design: Måned moderne liggende Color: Henrik Hvid Font: Stramme_Susanne Heart: Ikke_Hjerte Antal kolonner: 1
-                  </p>
-                  <button className="cartProduct__remove" onClick={() => removeFromCart(item)} aria-label={"Fjern " + item.name}>
+                  <Link to={`/product/${item.slug}`}>
+                    <h3 className="cartProduct__title">{item.title}</h3>
+                  </Link>
+                  <p className="cartProduct__description">{item.description}</p>
+                  <button className="cartProduct__remove" onClick={() => removeFromCart(item)} aria-label={"Fjern " + item.title}>
                     Fjern
                   </button>
                 </div>
@@ -77,7 +76,7 @@ export default function Cart() {
           <p className="cartCheckout__additionalCosts cartCheckout__text">Moms bliver medregnet og levering bliver beregnet ved kassen</p>
           <div className="cartCheckout__info">
             <p className="cartCheckout__text">Subtotal</p>
-            <p className="cartCheckout__price">{totalPrice.toFixed(2)}&nbsp;kr</p>
+            <p className="cartCheckout__price">{totalPrice}&nbsp;kr</p>
           </div>
           <div className="cartCheckout__buttons">
             <Link to="/shop" className="cartCheckout__shop">

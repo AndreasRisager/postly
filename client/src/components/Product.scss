@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .product {
   &:hover &__image {
     filter: contrast(1.2) saturate(1.5);
@@ -28,5 +30,52 @@
     width: 100%;
     padding: 10px 0;
     cursor: pointer;
+  }
+}
+.productList {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 2em 1.5em;
+  @media only screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+  &:hover &__image {
+    filter: contrast(1.2) saturate(1.5);
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  &__image {
+    transition: filter 600ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    vertical-align: middle;
+  }
+  &__name {
+    font-size: 1.2em;
+    color: #000;
+    letter-spacing: 0.4px;
+    margin-bottom: 0.3em;
+  }
+  &__price {
+    color: #1c1d1d;
+    font-size: 0.9em;
+    margin-bottom: 1em;
+  }
+  &__description {
+    white-space: pre-wrap;
+  }
+  &__button {
+    display: block;
+    text-align: center;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-top: 15px;
+    background-color: $primaryColor;
+    color: #000;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 0;
   }
 }

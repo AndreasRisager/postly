@@ -11,7 +11,7 @@ export function useCart() {
 export function CartProvider({ children }) {
   const [cart, setCart] = useLocalStorage("cart", []);
 
-  const totalPrice = cart.reduce((acc, curVal) => acc + curVal.price * curVal.quantity, 0);
+  const totalPrice = cart.reduce((acc, curVal) => acc + curVal.price * curVal.quantity, 0).toFixed(2);
   const totalItems = cart.reduce((acc, curVal) => acc + curVal.quantity, 0);
 
   const isCartEmpty = cart.length === 0;

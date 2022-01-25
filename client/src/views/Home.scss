@@ -5,17 +5,25 @@
   margin: 0 auto;
   padding: 0 $pagePadding;
 }
-.featuredProducts {
-  grid-template-columns: repeat(4, 1fr);
-  display: grid;
-  padding: 4em 0;
-  border-bottom: 1px solid #dee2e6;
-  margin: 4em 0 6em;
-  gap: 1em;
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+.featured {
+  margin: 6em 0 8em;
+  &__heading {
+    display: inline-block;
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    padding-bottom: 0.15em;
+    border-bottom: 3px solid $primaryColor;
   }
-  @media only screen and (max-width: 440px) {
-    grid-template-columns: 1fr;
+  &__products {
+    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    gap: 1em;
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media only screen and (max-width: 440px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
