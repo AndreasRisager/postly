@@ -24,7 +24,7 @@ export default function Home() {
       <ImageSlider slides={SliderData} />
       <main className="home">
         <section className="featured">
-          <h2 className="featured__heading">Udvalgte Produkter</h2>
+          <h2 className="featured__heading">Anbefalet til dig</h2>
           <div className="featured__products">
             {products.map((product) => (
               <Product product={product} key={product.id} />
