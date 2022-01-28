@@ -17,10 +17,10 @@ export function CartProvider({ children }) {
   const isCartEmpty = cart.length === 0;
 
   function addToCart(product) {
-    var exist = cart.find((item) => item.id === product.id);
+    var exist = cart.find((item) => item.id === product.id && item.message === product.message && item.size === product.size && item.frame === product.frame);
     if (exist) {
       setCart((prevCart) => {
-        return prevCart.map((item) => (item.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : item));
+        return prevCart.map((item) => (item.id === product.id && item.message === product.message && item.size === product.size && item.frame === product.frame ? { ...exist, quantity: exist.quantity + 1 } : item));
       });
     } else {
       setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);

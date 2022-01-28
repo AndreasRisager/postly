@@ -4,96 +4,34 @@ import Product from "../components/Product";
 import "./Shop.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import queryString from "query-string";
+import FilterShop from "../components/FilterShop";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
   const [listView, setListView] = useState(false);
-  const [priceLimit, setPriceLimit] = useState(undefined);
-  const [category, setCategory] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [openFilterMenu, setOpenFilterMenu] = useState(false);
 
   useEffect(() => {
     async function getProducts() {
       setLoading(true);
-      let filtering = queryString.stringify({ price_lte: priceLimit, "categories.name": category });
-      const { data } = await axios.get(`https://postly-dk.herokuapp.com/products?${filtering}`);
-      setProducts(data);
+      try {
+        const { data } = await axios.get(`https://postly-dk.herokuapp.com/products`);
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
       setLoading(false);
     }
     getProducts();
-  }, [priceLimit, category]);
-
-  //TODO: Filter without a new fetch
+  }, []);
 
   return (
     <>
       <SiteHeader />
       <main className="shop">
-        <aside className="shopFilter">
-          <div className="shopFilter__content">
-            <form>
-              <label htmlFor="searchFilter" className="screenreader">
-                søg
-              </label>
-              <input type="searchFilter" name="searchFilter" id="searchFilter" placeholder="Søg" />
-            </form>
-            <div className="shopFilter__filter">
-              <h4 className="shopFilter__title">Kategori</h4>
-              <button className={`shopFilter__button${category === undefined ? " shopFilter__button--active" : ""}`} onClick={() => setCategory()}>
-                alle
-              </button>
-              <button
-                className={`shopFilter__button${category === "Udvalgte" ? " shopFilter__button--active" : ""}`}
-                onClick={() => setCategory("Udvalgte")}>
-                udvalgte
-              </button>
-              <button
-                className={`shopFilter__button${category === "Nyheder" ? " shopFilter__button--active" : ""}`}
-                onClick={() => setCategory("Nyheder")}>
-                nyheder
-              </button>
-              <button
-                className={`shopFilter__button${category === "Vinter" ? " shopFilter__button--active" : ""}`}
-                onClick={() => setCategory("Vinter")}>
-                vinter
-              </button>
-              <button
-                className={`shopFilter__button${category === "Sommer" ? " shopFilter__button--active" : ""}`}
-                onClick={() => setCategory("Sommer")}>
-                sommer
-              </button>
-            </div>
-            <div className="shopFilter__filter">
-              <h4 className="shopFilter__title">Pris</h4>
-              <button
-                className={`shopFilter__button${priceLimit === undefined ? " shopFilter__button--active" : ""}`}
-                onClick={() => setPriceLimit(undefined)}>
-                alle
-              </button>
-              <button className={`shopFilter__button${priceLimit === 200 ? " shopFilter__button--active" : ""}`} onClick={() => setPriceLimit(200)}>
-                under 200 kr
-              </button>
-              <button className={`shopFilter__button${priceLimit === 300 ? " shopFilter__button--active" : ""}`} onClick={() => setPriceLimit(300)}>
-                under 300 kr
-              </button>
-              <button className={`shopFilter__button${priceLimit === 400 ? " shopFilter__button--active" : ""}`} onClick={() => setPriceLimit(400)}>
-                under 400 kr
-              </button>
-              <button className={`shopFilter__button${priceLimit === 500 ? " shopFilter__button--active" : ""}`} onClick={() => setPriceLimit(500)}>
-                under 500 kr
-              </button>
-            </div>
-            <button
-              className="shopFilter__clear"
-              onClick={() => {
-                setPriceLimit(undefined);
-                setCategory(undefined);
-              }}>
-              Fjern filtre
-            </button>
-          </div>
-        </aside>
+        <button className={openFilterMenu ? "shopFilterMobile shopFilterMobile--active" : "shopFilterMobile"} onClick={() => setOpenFilterMenu(!openFilterMenu)}>Filter <i className="fas fa-funnel-dollar" /></button>
+        <FilterShop open={openFilterMenu} />
         <div>
           <section className="shopSorting">
             <div className="shopSorting__views">
@@ -126,9 +64,12 @@ export default function Shop() {
               </select>
             </form>
           </section>
-          <section className="shopProducts" style={products.length === 0 || loading ? { display: "block" } : {}}>
-            {loading ? <h4>Loading...</h4> : products.map((product) => <Product product={product} key={product.id} listView={listView} />)}
+          <section className="shopProducts">
+            {loading && <h4>Loading...</h4>} 
             {!loading && products.length === 0 && <h4>Beklager, ingen produkter matchede din søgning.</h4>}
+            <div className={listView ? "products productsList" : "products"}>
+                {products.map((product) => <Product product={product} key={product.id} listView={listView} />)}
+            </div>
           </section>
         </div>
       </main>

@@ -42,6 +42,8 @@ export default function Cart() {
                     <h3 className="cartProduct__title">{item.title}</h3>
                   </Link>
                   <p className="cartProduct__description">{item.description}</p>
+                  <p className="cartProduct__description">Størrelse: {item.size}, Ramme: {item.frame}.</p>
+                  {item.message && <p className="cartProduct__description">Besked: {item.message}</p>}
                   <button className="cartProduct__remove" onClick={() => removeFromCart(item)} aria-label={"Fjern " + item.title}>
                     Fjern
                   </button>
