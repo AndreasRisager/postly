@@ -16,12 +16,9 @@ export default function SiteHeader() {
             <img src="https://res.cloudinary.com/dffpafuyg/image/upload/v1643112043/logo_rzl0ec.png" alt="postly logo" />
           </Link>
           <div className="siteHeader__menu">
-            <button aria-label="open search">
+            {/* <button aria-label="open search">
               <i className="fas fa-search" aria-hidden="true"></i>
-            </button>
-            <Link to="/">
-              <i className="fas fa-user" aria-hidden="true"></i>
-            </Link>
+            </button> */}
             <Link to="/cart" className="siteHeader__cart">
               <i className="fas fa-shopping-bag" aria-hidden="true"></i>
               <div className="siteHeader__cart-count">{totalItems >= 100 ? "99+" : totalItems}</div>
