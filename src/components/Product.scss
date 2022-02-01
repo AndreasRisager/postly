@@ -1,6 +1,7 @@
 @import "../variables.scss";
 
 .product {
+  text-align: center;
   &__image {
     vertical-align: middle;
     object-fit: contain;
@@ -19,11 +20,12 @@
     font-size: 0.95em;
   }
   &__description {
-    padding:0.5em 0;
+    padding: 0.5em 0;
   }
   &__button {
+    display: block;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
     background-color: $primaryColor;
     color: #fff;
     border: none;
@@ -36,12 +38,20 @@
 .product.productList {
   display: grid;
   grid-template-columns: 180px 1fr;
+  text-align: left;
   .product__info {
+    padding: 0.8em 0.8em 0 0.8em;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1em 1em 0 1em;
   }
   @media only screen and (max-width: 420px) {
+    grid-template-columns: 130px 1fr;
+    .product__info {
+      padding: 0.5em 0.5em 0 0.5em;
+    }
+  }
+  @media only screen and (max-width: 360px) {
     grid-template-columns: 1fr;
     .product__info {
       padding: 1em 0 0 0;

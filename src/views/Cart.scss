@@ -62,6 +62,7 @@
     }
     &__image {
       vertical-align: middle;
+      align-self: center;
     }
     &__info {
       padding-right: 1em;
@@ -75,7 +76,7 @@
     }
     &__description {
       color: #3d4246;
-      padding: 5px 0;
+      padding-bottom: 5px;
       font-size: 0.875em;
       font-style: italic;
       white-space: pre-wrap;
@@ -84,7 +85,7 @@
       background-color: transparent;
       color: #3d4246;
       border: 1px solid #3d4246;
-      padding: 8px 10px;
+      padding: 6px 10px;
       font-size: 0.75em;
       font-weight: 600;
       letter-spacing: 0.96px;

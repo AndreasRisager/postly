@@ -27,10 +27,10 @@ export default function Success({ location }) {
   const session_id = new URLSearchParams(location.search).get("session_id");
   const { order, loading } = useOrder(session_id);
   return (
-    <div>
+    <main>
       <h2>Tak for dit køb!</h2>
       {loading && <p>Loading...</p>}
       {order && <p>Din ordre er bekræftet, med ordrenummer: {order.id}</p>}
-    </div>
+    </main>
   );
 }

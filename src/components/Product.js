@@ -7,11 +7,7 @@ export default function Product({ product, listView }) {
   if (listView)
     return (
       <article className="product productList">
-        <img
-          src={product.image.url}
-          alt={product.title}
-          className="product__image"
-        />
+        <img src={product.image.url} alt={product.title} className="product__image" />
         <div className="product__info">
           <p className="product__title">{product.title}</p>
           <p className="product__price">{product.price.toFixed(2)}&nbsp;kr</p>
@@ -26,14 +22,13 @@ export default function Product({ product, listView }) {
   return (
     <article className="product">
       <Link to={`/product/${product.slug}`}>
-        <img
-          src={product.image.url}
-          alt={product.title}
-          className="product__image"
-        />
+        <img src={product.image.url} alt={product.title} className="product__image" />
         <div className="product__info">
           <p className="product__title">{product.title}</p>
           <p className="product__price">{product.price.toFixed(2)}&nbsp;kr</p>
+          <Link to={`/product/${product.slug}`} className="product__button">
+            vis produkt
+          </Link>
         </div>
       </Link>
     </article>
