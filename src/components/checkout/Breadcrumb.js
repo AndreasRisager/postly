@@ -1,6 +1,6 @@
 import { Link } from "@reach/router";
 
-export default function Breadcrumb({ step }) {
+export default function Breadcrumb({ step, setCheckout, checkout }) {
   return (
     <ol className="breadcrumb">
       <li className="breadcrumb__item breadcrumb__item--completed">
@@ -8,14 +8,28 @@ export default function Breadcrumb({ step }) {
         <i className="fas fa-chevron-right breadcrumb__arrow" />
       </li>
       <li className="breadcrumb__item breadcrumb__item--current">
-        <span>Oplysninger</span>
+        <button
+          className="breadcrumb__button"
+          onClick={() => setCheckout({ ...checkout, step: 1 })}>
+          Oplysninger
+        </button>
         <i className="fas fa-chevron-right breadcrumb__arrow" />
       </li>
       <li className="breadcrumb__item">
-        <span>Levering</span>
+        <button
+          className="breadcrumb__button"
+          onClick={() => setCheckout({ ...checkout, step: 2 })}>
+          Levering
+        </button>
         <i className="fas fa-chevron-right breadcrumb__arrow" />
       </li>
-      <li className="breadcrumb__item">Betaling</li>
+      <li className="breadcrumb__item">
+        <button
+          className="breadcrumb__button"
+          onClick={() => setCheckout({ ...checkout, step: 3 })}>
+          Betaling
+        </button>
+      </li>
     </ol>
   );
 }

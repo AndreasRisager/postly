@@ -5,7 +5,6 @@ export default function RadioField({
   name,
   id,
   value,
-  icon,
   price,
   ...rest
 }) {
@@ -14,16 +13,13 @@ export default function RadioField({
       <input
         type="radio"
         name={name}
+        value={value}
         id={id}
         {...rest}
         className="checkout__radio"
       />
       <label htmlFor={id} className="checkout__label">
-        <span>
-          {icon}
-          {children}
-        </span>
-        {price && <span>{price}&nbsp;kr</span>}
+        {children}
       </label>
     </div>
   );
