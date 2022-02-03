@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./helpers/CartContext";
+import { CheckoutProvider } from "./helpers/CheckoutContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <CartProvider>
-      <App />
+      <CheckoutProvider>
+        <App />
+      </CheckoutProvider>
     </CartProvider>
   </React.StrictMode>,
   document.getElementById("root")

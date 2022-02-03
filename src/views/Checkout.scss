@@ -1,12 +1,15 @@
 @import "../variables.scss";
 
 .checkout {
-  max-width: 930px;
+  max-width: 1000px;
   margin: 3em auto;
   padding: 0 $pagePadding;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 2em;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2em;
+  }
 }
 .checkout__heading {
   font-size: 1.5em;
@@ -54,6 +57,7 @@
 }
 .breadcrumb {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   list-style: none;
   margin-bottom: 1.5em;
@@ -63,6 +67,9 @@
     white-space: nowrap;
     &--completed {
       color: $checkoutActiveColor;
+      button {
+        cursor: pointer;
+      }
     }
     &--current {
       color: #333;
@@ -81,13 +88,16 @@
   }
 }
 .checkout__section {
-  margin: 1em 0;
+  margin: 2em 0;
+  &:first-of-type {
+    margin: 0;
+  }
 }
 .checkout__title {
   font-size: 1.2em;
   color: #333;
   font-weight: 500;
-  padding: 16px 0;
+  padding-bottom: 16px;
   &--nopadding {
     padding: 0;
   }
@@ -102,11 +112,30 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
+  &--billing {
+    padding: 1em;
+    background-color: #fafafa;
+    border: 1px solid #d9d9d9;
+    border-radius: 0 0 5px 5px;
+    height: auto;
+    transition: height 1s ease-out;
+  }
+  &--hide {
+    overflow: hidden;
+    height: 0;
+    display: none;
+  }
+}
+.checkout__statusMessage {
+  color: red;
+  font-style: italic;
 }
 .checkout__stepButtons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 2em;
   margin: 2em 0;
   .checkout__stepNext {
     background-color: $checkoutActiveColor;
@@ -143,17 +172,61 @@
     }
     &-label {
       color: $checkoutTextColor;
-      flex: 0 1 4.8em;
+      flex: 0 1 5em;
     }
     &-value {
       padding: 0 1em;
       color: #333;
+      flex: 1;
     }
     &-button {
       background-color: transparent;
       color: $checkoutActiveColor;
       border: none;
       cursor: pointer;
+    }
+  }
+}
+
+.checkout__summary {
+  min-width: 250px;
+  &-text {
+    color: #545454;
+    font-size: 1em;
+    &--small {
+      font-size: 0.8em;
+    }
+  }
+  &-price p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+  }
+  &-total {
+    border-top: 1px solid #d9d9d9;
+    padding: 1em 0;
+    p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1em;
+    }
+    &Price {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .checkout__wrapper {
+    grid-template-columns: 1fr;
+    .checkout__summary {
+      min-width: auto;
+      grid-row: 1/2;
     }
   }
 }

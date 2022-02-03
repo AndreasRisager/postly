@@ -6,10 +6,11 @@ export default function RadioField({
   id,
   value,
   price,
+  style,
   ...rest
 }) {
   return (
-    <div className="checkout__radio-wrapper">
+    <div className="checkout__radio-wrapper" style={style}>
       <input
         type="radio"
         name={name}

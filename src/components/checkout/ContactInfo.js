@@ -1,11 +1,77 @@
-import RadioField from "../checkout/RadioField";
 import CheckboxField from "../checkout/CheckboxField";
 import InputField from "../checkout/InputField";
 import { Link } from "@reach/router";
+import { useState } from "react";
 
 export default function ContactInfo({ checkout, setCheckout, nextStep }) {
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (e.target.email.value === "") {
+      setStatusMessage("Udfyld Email Address");
+      e.target.email.focus();
+      return;
+    }
+    var at = e.target.email.value.indexOf("@");
+    var dot = e.target.email.value.lastIndexOf(".");
+    if (at <= 0) {
+      e.target.email.focus();
+      setStatusMessage("Skriv gyldig email");
+      return;
+    }
+    if (dot < at + 2) {
+      e.target.email.focus();
+      setStatusMessage("Skriv gyldig email");
+      return;
+    }
+    if (e.target.email.value.length <= dot + 2) {
+      e.target.email.focus();
+      setStatusMessage("Skriv gyldig email");
+      return;
+    }
+
+    if (e.target.country.value === "") {
+      e.target.country.focus();
+      setStatusMessage("Udfyld Land/område");
+      return;
+    }
+    if (e.target.firstname.value === "") {
+      e.target.firstname.focus();
+      setStatusMessage("Udfyld Fornavn");
+      return;
+    }
+    if (e.target.lastname.value === "") {
+      e.target.lastname.focus();
+      setStatusMessage("Udfyld Efternavn");
+      return;
+    }
+    if (e.target.shipping_address1.value === "") {
+      e.target.shipping_address1.focus();
+      setStatusMessage("Udfyld Addresse");
+      return;
+    }
+    if (e.target.zip_code.value === "") {
+      e.target.zip_code.focus();
+      setStatusMessage("Udfyld Postnummer");
+      return;
+    }
+    if (e.target.city.value === "") {
+      e.target.city.focus();
+      setStatusMessage("Udfyld By");
+      return;
+    }
+    if (e.target.phone.value === "") {
+      e.target.phone.focus();
+      setStatusMessage("Udfyld Telefonnummer");
+      return;
+    }
+    nextStep();
+  };
+
   return (
-    <form className="checkout__contactInfo" noValidate>
+    <form className="checkout__contactInfo" noValidate onSubmit={handleSubmit}>
       <div className="checkout__section">
         <h2 className="checkout__title">Kontaktinformation</h2>
         <InputField
@@ -21,41 +87,7 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
           Bliv V.I.P &amp; få adgang til kampagner før alle andre
         </CheckboxField>
       </div>
-      <div className="checkout__section">
-        <h2 className="checkout__title">Leveringsmetode</h2>
-        <RadioField
-          name="delivery_method"
-          id="delivery_ship"
-          defaultChecked
-          value="ship"
-          onClick={(e) => {
-            console.log(e.target.value);
-            setCheckout((prev) => ({
-              ...prev,
-              delivery_method: e.target.value,
-            }));
-          }}>
-          <div>
-            <i className="fas fa-truck" />
-            Afsend
-          </div>
-        </RadioField>
-        <RadioField
-          name="delivery_method"
-          id="delivery_pickup"
-          value="pickup"
-          onClick={(e) => {
-            setCheckout((prev) => ({
-              ...prev,
-              delivery_method: e.target.value,
-            }));
-          }}>
-          <div>
-            <i className="fas fa-store" />
-            Afhent
-          </div>
-        </RadioField>
-      </div>
+
       <div className="checkout__section">
         <h2 className="checkout__title">Leveringsadresse</h2>
         <div className="checkout__fields">
@@ -163,15 +195,23 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
             Telefon (du modtager en sms når din pakke sendes)
           </InputField>
         </div>
-        <CheckboxField id="checkout_remember_me">
+        <CheckboxField
+          id="checkout_remember_me"
+          defaultChecked
+          onClick={(e) =>
+            setCheckout({ ...checkout, remember_me: e.target.checked })
+          }>
           Gem denne information for hurtigere udtjekning næste gang
         </CheckboxField>
       </div>
+      {statusMessage && (
+        <p className="checkout__statusMessage">*{statusMessage}*</p>
+      )}
       <div className="checkout__stepButtons">
         <Link to="/cart" className="checkout__stepBack">
           Tilbage til indkøbskurven
         </Link>
-        <button className="checkout__stepNext" onClick={nextStep}>
+        <button className="checkout__stepNext" type="submit">
           Fortsæt til levering
         </button>
       </div>
