@@ -1,4 +1,10 @@
 .imageSlider {
+  .slick-dots {
+    bottom: 0;
+    li button::before {
+      font-size: 7px;
+    }
+  }
   &__content {
     max-width: 1440px;
     margin: 0 auto;
