@@ -11,7 +11,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const { cart, resetCart } = useCart();
-  const { user, token } = useAuth();
+  const { user } = useAuth();
 
   const stripe = useStripe();
   const elements = useElements();
