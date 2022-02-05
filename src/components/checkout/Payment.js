@@ -61,6 +61,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         process.env.NODE_ENV === "development"
           ? "http://localhost:1337"
           : "https://postly-dk.herokuapp.com";
+
       const { data: clientSecret } = await axios.post(`${BASE_URL}/orders/`, {
         cart,
         checkout,
