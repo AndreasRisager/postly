@@ -84,7 +84,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       setIsProcessing(false);
       if (paymentIntent.status === "succeeded") {
         console.log("Tak for dit køb!");
-        // resetCart();
+        resetCart();
         nextStep();
       }
     } catch (error) {
