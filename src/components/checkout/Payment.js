@@ -4,14 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useCart } from "../../helpers/CartContext";
-import { useAuth } from "../../helpers/AuthContext";
 
 export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const { cart, resetCart } = useCart();
-  const { user } = useAuth();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -65,7 +63,6 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       const { data: clientSecret } = await axios.post(`${BASE_URL}/orders/`, {
         cart,
         checkout,
-        user,
       });
 
       const { paymentMethod } = await stripe.createPaymentMethod({
@@ -79,9 +76,11 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         receipt_email: checkout.email,
       });
 
-      if (error) throw error;
-
       setIsProcessing(false);
+      if (error) {
+        setStatusMessage(error.message);
+        return;
+      }
       if (paymentIntent.status === "succeeded") {
         console.log("Tak for dit køb!");
         resetCart();
@@ -89,7 +88,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       }
     } catch (error) {
       setIsProcessing(false);
-      setStatusMessage(error.message);
+      setStatusMessage("Der opstod en fejl!");
       console.log(error);
     }
   };

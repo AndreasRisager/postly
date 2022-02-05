@@ -7,7 +7,6 @@ import ProductView from "./views/ProductView";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import Checkout from "./views/Checkout";
-import Account from "./views/Account";
 import Success from "./views/Success";
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
         <ProductView path="/product/:slug" />
         <Shop path="/shop" />
         <Checkout path="/checkout" />
-        <Account path="/account" />
         <Success path="/success" />
       </Router>
       <SiteFooter />

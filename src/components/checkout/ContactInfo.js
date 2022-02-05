@@ -67,6 +67,12 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
       setStatusMessage("Udfyld Telefonnummer");
       return;
     }
+    if (e.target.phone.value.match(/[^0-9]/g)) {
+      e.target.phone.focus();
+      setStatusMessage("Udfyld Telefonnummer korrekt");
+      return;
+    }
+
     nextStep();
   };
 
