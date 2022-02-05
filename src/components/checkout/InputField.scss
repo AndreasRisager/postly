@@ -9,11 +9,6 @@
   &--focus.checkout__field-wrapper {
     border-color: $checkoutActiveColor;
     box-shadow: 0 0 0 1px $checkoutActiveColor;
-    .checkout__input {
-      &::placeholder {
-        opacity: 0;
-      }
-    }
   }
   .checkout__label {
     transition: all 0.2s ease-out;
@@ -33,6 +28,9 @@
       font-size: 0.8em;
       top: 4px;
       opacity: 1;
+      .checkout__input::placeholder {
+        opacity: 0;
+      }
       & + .checkout__input {
         padding: 21px 11px 5px;
       }

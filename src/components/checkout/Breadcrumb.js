@@ -76,6 +76,33 @@ export default function Breadcrumb({ step, setCheckout, checkout }) {
           </>
         );
       default:
+        return (
+          <>
+            <li className="breadcrumb__item breadcrumb__item--completed">
+              <button
+                className="breadcrumb__button"
+                onClick={() => setCheckout({ ...checkout, step: 1 })}>
+                Oplysninger
+              </button>
+              <i className="fas fa-chevron-right breadcrumb__arrow" />
+            </li>
+            <li className="breadcrumb__item breadcrumb__item--completed">
+              <button
+                className="breadcrumb__button"
+                onClick={() => setCheckout({ ...checkout, step: 2 })}>
+                Levering
+              </button>
+              <i className="fas fa-chevron-right breadcrumb__arrow" />
+            </li>
+            <li className="breadcrumb__item breadcrumb__item--completed">
+              <button
+                className="breadcrumb__button"
+                onClick={() => setCheckout({ ...checkout, step: 3 })}>
+                Betaling
+              </button>
+            </li>
+          </>
+        );
     }
   };
   return (

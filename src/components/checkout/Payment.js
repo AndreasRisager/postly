@@ -1,16 +1,102 @@
 import RadioField from "../checkout/RadioField";
 import InputField from "../checkout/InputField";
 import { useState } from "react";
+import axios from "axios";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useCart } from "../../helpers/CartContext";
+import { useAuth } from "../../helpers/AuthContext";
 
 export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
   const [showBillingForm, setShowBillingForm] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const { cart, resetCart } = useCart();
+  const { user, token } = useAuth();
 
-  const handleSubmit = (e) => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("BETAL");
+    const cardElement = elements.getElement(CardElement);
 
-    nextStep();
+    if (!cardElement._complete) {
+      setStatusMessage("Udfyld kort information");
+      return;
+    }
+
+    if (!stripe || !elements) return;
+
+    setIsProcessing(true);
+
+    const billing_details = showBillingForm
+      ? {
+          address: {
+            city: checkout.billing_city,
+            country: "DK",
+            line1: checkout.billing_address1,
+            line2: checkout.billing_address2,
+            postal_code: checkout.billing_zip_code,
+          },
+          email: checkout.email,
+          name: `${checkout.billing_firstname} ${checkout.billing_lastname}`,
+          phone: checkout.billing_phone,
+        }
+      : {
+          address: {
+            city: checkout.city,
+            country: "DK",
+            line1: checkout.shipping_address1,
+            line2: checkout.shipping_address2,
+            postal_code: checkout.zip_code,
+          },
+          email: checkout.email,
+          name: `${checkout.firstname} ${checkout.lastname}`,
+          phone: checkout.phone,
+        };
+
+    try {
+      const { data: clientSecret } = await axios.post(`http://localhost:1337/orders/`, {
+        cart,
+        checkout,
+        user,
+      });
+
+      const { paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+        billing_details,
+      });
+
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+        receipt_email: checkout.email,
+      });
+
+      if (error) throw error;
+
+      setIsProcessing(false);
+      if (paymentIntent.status === "succeeded") {
+        console.log("Tak for dit køb!");
+        // resetCart();
+        nextStep();
+      }
+    } catch (error) {
+      setIsProcessing(false);
+      setStatusMessage(error.message);
+      console.log(error);
+    }
+  };
+
+  const CardElementOptions = {
+    hidePostalCode: true,
+    style: {
+      base: {
+        fontSize: "17px",
+        color: "#333",
+      },
+    },
   };
 
   return (
@@ -24,9 +110,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         <div className="checkout__review">
           <p className="checkout__review-label">Send til</p>
           <p className="checkout__review-value">
-            {`${checkout.business && `${checkout.business},`} ${
-              checkout.shipping_address1
-            }, ${
+            {`${checkout.shipping_address1}, ${
               checkout.shipping_address2 && `${checkout.shipping_address2},`
             } ${checkout.zip_code} ${checkout.city}, ${checkout.country}`}
           </p>
@@ -35,8 +119,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         <div className="checkout__review">
           <p className="checkout__review-label">Methode</p>
           <p className="checkout__review-value">
-            {checkout.delivery_method} &bull;{" "}
-            {checkout.delivery_price.toFixed(2)}
+            {checkout.delivery_method} &bull; {checkout.delivery_price.toFixed(2)}
             &nbsp;kr.
           </p>
           <button className="checkout__review-button">Skift</button>
@@ -44,15 +127,13 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       </div>
       <div className="checkout__section">
         <h2 className="checkout__title checkout__title--nopadding">Betaling</h2>
-        <h3 className="checkout__subtitle">
-          Alle transaktioner er sikre og krypterede.
-        </h3>
-        <span>KOOOOORT</span>
+        <h3 className="checkout__subtitle">Alle transaktioner er sikre og krypterede.</h3>
+        <div className="cardElementContainer">
+          <CardElement options={CardElementOptions} />
+        </div>
       </div>
       <div className="checkout__section">
-        <h2 className="checkout__title checkout__title--nopadding">
-          Faktureringsadresse
-        </h2>
+        <h2 className="checkout__title checkout__title--nopadding">Faktureringsadresse</h2>
         <h3 className="checkout__subtitle">
           Vælg den adresse, der matcher dit kort eller betalingsmetode.
         </h3>
@@ -83,23 +164,14 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
               ? "checkout__fields checkout__fields--billing"
               : "checkout__fields checkout__fields--billing checkout__fields--hide"
           }>
-          <InputField
-            type="text"
-            id="country"
-            value={checkout.country}
-            onChange={(e) => {
-              setCheckout((prev) => ({
-                ...prev,
-                billing_country: e.target.value,
-              }));
-            }}>
+          <InputField type="text" id="country" value="Danmark" disabled>
             Land/område
           </InputField>
           <InputField
             type="text"
             id="firstname"
             style={{ gridColumn: "span 1" }}
-            value={checkout.firstname}
+            value={checkout.billing_firstname}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -112,7 +184,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
             type="text"
             id="lastname"
             style={{ gridColumn: "span 1" }}
-            value={checkout.lastname}
+            value={checkout.billing_lastname}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -123,20 +195,8 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
           </InputField>
           <InputField
             type="text"
-            id="business"
-            value={checkout.business}
-            onChange={(e) => {
-              setCheckout((prev) => ({
-                ...prev,
-                billing_business: e.target.value,
-              }));
-            }}>
-            Firma (valgfrit)
-          </InputField>
-          <InputField
-            type="text"
-            id="shipping_address1"
-            value={checkout.shipping_address1}
+            id="billing_address1"
+            value={checkout.billing_address1}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -147,8 +207,8 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
           </InputField>
           <InputField
             type="text"
-            id="shipping_address2"
-            value={checkout.shipping_address2}
+            id="billing_address2"
+            value={checkout.billing_address2}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -159,9 +219,9 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
           </InputField>
           <InputField
             type="text"
-            id="zip_code"
+            id="billing_zip_code"
             style={{ gridColumn: "span 1" }}
-            value={checkout.zip_code}
+            value={checkout.billing_zip_code}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -174,7 +234,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
             type="text"
             id="city"
             style={{ gridColumn: "span 1" }}
-            value={checkout.city}
+            value={checkout.billing_city}
             onChange={(e) => {
               setCheckout((prev) => ({
                 ...prev,
@@ -183,26 +243,18 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
             }}>
             By
           </InputField>
-          <InputField
-            type="text"
-            id="phone"
-            value={checkout.phone}
-            onChange={(e) => {
-              setCheckout((prev) => ({
-                ...prev,
-                billing_phone: e.target.value,
-              }));
-            }}>
-            Telefon (du modtager en sms når din pakke sendes)
-          </InputField>
         </div>
       </div>
+      {statusMessage && <p className="checkout__statusMessage">*{statusMessage}*</p>}
       <div className="checkout__stepButtons">
         <button className="checkout__stepBack" type="button" onClick={prevStep}>
           Tilbage til levering
         </button>
-        <button className="checkout__stepNext" type="submit">
-          Fuldfør ordren
+        <button
+          className="checkout__stepNext"
+          type="submit"
+          disabled={isProcessing || !stripe || !elements}>
+          {isProcessing ? "Behandler ordren..." : "Fuldfør ordren"}
         </button>
       </div>
     </form>

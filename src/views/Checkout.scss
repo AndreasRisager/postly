@@ -144,6 +144,9 @@
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
   .checkout__stepBack {
     color: $checkoutActiveColor;
@@ -219,6 +222,11 @@
       color: #333;
     }
   }
+}
+.cardElementContainer {
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 1em;
 }
 
 @media only screen and (max-width: 768px) {

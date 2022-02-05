@@ -4,10 +4,11 @@ import { Router } from "@reach/router";
 import Cart from "./views/Cart";
 import Shop from "./views/Shop";
 import ProductView from "./views/ProductView";
-import Success from "./views/Success";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import Checkout from "./views/Checkout";
+import Account from "./views/Account";
+import Success from "./views/Success";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <ProductView path="/product/:slug" />
         <Shop path="/shop" />
         <Checkout path="/checkout" />
+        <Account path="/account" />
         <Success path="/success" />
       </Router>
       <SiteFooter />

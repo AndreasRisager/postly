@@ -4,14 +4,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./helpers/CartContext";
 import { CheckoutProvider } from "./helpers/CheckoutContext";
+import { AuthProvider } from "./helpers/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CartProvider>
-      <CheckoutProvider>
-        <App />
-      </CheckoutProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <CheckoutProvider>
+          <App />
+        </CheckoutProvider>
+      </CartProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -11,10 +11,9 @@ export function CheckoutProvider({ children }) {
     JSON.parse(localStorage.getItem("checkout")) || {
       step: 1,
       email: "",
-      country: "",
+      country: "DK",
       firstname: "",
       lastname: "",
-      business: "",
       shipping_address1: "",
       shipping_address2: "",
       zip_code: "",
@@ -26,12 +25,10 @@ export function CheckoutProvider({ children }) {
       billing_country: "",
       billing_firstname: "",
       billing_lastname: "",
-      billing_business: "",
       billing_address1: "",
       billing_address2: "",
       billing_zip_code: "",
       billing_city: "",
-      billing_phone: "",
     }
   );
 
@@ -48,9 +45,5 @@ export function CheckoutProvider({ children }) {
     setCheckout,
   };
 
-  return (
-    <CheckoutContext.Provider value={value}>
-      {children}
-    </CheckoutContext.Provider>
-  );
+  return <CheckoutContext.Provider value={value}>{children}</CheckoutContext.Provider>;
 }

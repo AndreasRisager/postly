@@ -74,15 +74,17 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
     <form className="checkout__contactInfo" noValidate onSubmit={handleSubmit}>
       <div className="checkout__section">
         <h2 className="checkout__title">Kontaktinformation</h2>
-        <InputField
-          type="email"
-          id="email"
-          value={checkout.email}
-          onChange={(e) => {
-            setCheckout((prev) => ({ ...prev, email: e.target.value }));
-          }}>
-          Mail
-        </InputField>
+        <div className="checkout__fields">
+          <InputField
+            type="email"
+            id="email"
+            value={checkout.email}
+            onChange={(e) => {
+              setCheckout((prev) => ({ ...prev, email: e.target.value }));
+            }}>
+            Mail
+          </InputField>
+        </div>
         <CheckboxField id="newsletter" defaultChecked>
           Bliv V.I.P &amp; få adgang til kampagner før alle andre
         </CheckboxField>
@@ -91,13 +93,7 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
       <div className="checkout__section">
         <h2 className="checkout__title">Leveringsadresse</h2>
         <div className="checkout__fields">
-          <InputField
-            type="text"
-            id="country"
-            value={checkout.country}
-            onChange={(e) => {
-              setCheckout((prev) => ({ ...prev, country: e.target.value }));
-            }}>
+          <InputField type="text" id="country" value="Danmark" disabled>
             Land/område
           </InputField>
           <InputField
@@ -125,18 +121,6 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
               }));
             }}>
             Efternavn
-          </InputField>
-          <InputField
-            type="text"
-            id="business"
-            value={checkout.business}
-            onChange={(e) => {
-              setCheckout((prev) => ({
-                ...prev,
-                business: e.target.value,
-              }));
-            }}>
-            Firma (valgfrit)
           </InputField>
           <InputField
             type="text"
@@ -190,7 +174,10 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
             id="phone"
             value={checkout.phone}
             onChange={(e) => {
-              setCheckout((prev) => ({ ...prev, phone: e.target.value }));
+              setCheckout((prev) => ({
+                ...prev,
+                phone: e.target.value,
+              }));
             }}>
             Telefon (du modtager en sms når din pakke sendes)
           </InputField>
@@ -198,15 +185,11 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
         <CheckboxField
           id="checkout_remember_me"
           defaultChecked
-          onClick={(e) =>
-            setCheckout({ ...checkout, remember_me: e.target.checked })
-          }>
+          onClick={(e) => setCheckout({ ...checkout, remember_me: e.target.checked })}>
           Gem denne information for hurtigere udtjekning næste gang
         </CheckboxField>
       </div>
-      {statusMessage && (
-        <p className="checkout__statusMessage">*{statusMessage}*</p>
-      )}
+      {statusMessage && <p className="checkout__statusMessage">*{statusMessage}*</p>}
       <div className="checkout__stepButtons">
         <Link to="/cart" className="checkout__stepBack">
           Tilbage til indkøbskurven
