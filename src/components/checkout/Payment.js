@@ -9,7 +9,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-  const { cart, resetCart } = useCart();
+  const { cart, resetCart, isCartEmpty } = useCart();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -257,7 +257,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         <button
           className="checkout__stepNext"
           type="submit"
-          disabled={isProcessing || !stripe || !elements}>
+          disabled={isProcessing || !stripe || !elements || isCartEmpty}>
           {isProcessing ? "Behandler ordren..." : "Fuldfør ordren"}
         </button>
       </div>
