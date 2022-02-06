@@ -188,12 +188,6 @@ export default function ContactInfo({ checkout, setCheckout, nextStep }) {
             Telefon (du modtager en sms når din pakke sendes)
           </InputField>
         </div>
-        <CheckboxField
-          id="checkout_remember_me"
-          defaultChecked
-          onClick={(e) => setCheckout({ ...checkout, remember_me: e.target.checked })}>
-          Gem denne information for hurtigere udtjekning næste gang
-        </CheckboxField>
       </div>
       {statusMessage && <p className="checkout__statusMessage">*{statusMessage}*</p>}
       <div className="checkout__stepButtons">

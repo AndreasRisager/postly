@@ -30,15 +30,6 @@ export function CheckoutProvider({ children }) {
     billing_city: "",
   });
 
-  // TODO: STORE SOMEWHERE SECURE
-  // useEffect(() => {
-  //   if (checkout.remember_me) {
-  //     localStorage.setItem("checkout", JSON.stringify(checkout));
-  //   } else {
-  //     localStorage.removeItem("checkout");
-  //   }
-  // }, [checkout]);
-
   const value = {
     checkout,
     setCheckout,
