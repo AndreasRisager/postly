@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import ImageSlider from "../components/ImageSlider";
 import Newsletter from "../components/Newsletter";
 import Product from "../components/Product";
-import { SliderData } from "../components/SliderData";
 import "./Home.scss";
 
 export default function Home() {
@@ -18,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <ImageSlider slides={SliderData} />
+      <ImageSlider />
       <main className="home">
         <section className="featured">
           <h2 className="featured__heading">Anbefalet til dig</h2>

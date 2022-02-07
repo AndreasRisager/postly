@@ -37,6 +37,7 @@
   }
   &__image {
     height: calc(100vh - 173px);
+    max-height: 1000px;
     object-fit: cover;
   }
 }
