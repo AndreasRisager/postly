@@ -2,8 +2,6 @@ import "./Product.scss";
 import { Link } from "@reach/router";
 
 export default function Product({ product, listView }) {
-  if (product.status !== "published") return null;
-
   if (listView)
     return (
       <article className="product productList">
