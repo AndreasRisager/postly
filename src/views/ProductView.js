@@ -45,7 +45,7 @@ export default function ProductView({ slug }) {
         <div className="productView__content">
           <h2 className="productView__title">{product.title}</h2>
           <p className="productView__price">
-            {product.price
+            {product.price !== undefined
               ? `${
                   product.price +
                   (currentSize ? currentSize.price : 0) +
