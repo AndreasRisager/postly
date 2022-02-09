@@ -27,7 +27,9 @@ export default function Shop() {
   return (
     <main className="shop">
       <button
-        className={openFilterMenu ? "shopFilterMobile shopFilterMobile--active" : "shopFilterMobile"}
+        className={
+          openFilterMenu ? "shopFilterMobile shopFilterMobile--active" : "shopFilterMobile"
+        }
         onClick={() => setOpenFilterMenu(!openFilterMenu)}>
         Filter <i className="fas fa-funnel-dollar" />
       </button>
@@ -66,7 +68,9 @@ export default function Shop() {
         </section>
         <section className="shopProducts">
           {loading && <h4>Loading...</h4>}
-          {!loading && products.length === 0 && <h4>Beklager, ingen produkter matchede din søgning.</h4>}
+          {!loading && products.length === 0 && (
+            <h4>Beklager, ingen produkter matchede din søgning.</h4>
+          )}
           <div className={listView ? "products productsList" : "products"}>
             {products.map((product) => (
               <Product product={product} key={product.id} listView={listView} />

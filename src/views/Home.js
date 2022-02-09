@@ -9,7 +9,11 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     async function getProducts() {
-      const { data } = await axios.get("http://localhost:1337/categories/udvalgte");
+      const BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:1337"
+          : "https://postly-dk.herokuapp.com";
+      const { data } = await axios.get(`${BASE_URL}/categories/udvalgte`);
       setProducts(data.products);
     }
     getProducts();

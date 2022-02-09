@@ -15,7 +15,11 @@ export default function ProductView({ slug }) {
 
   useEffect(() => {
     async function getProduct() {
-      const { data } = await axios.get(`http://localhost:1337/products/${slug}`);
+      const BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:1337"
+          : "https://postly-dk.herokuapp.com";
+      const { data } = await axios.get(`${BASE_URL}/${slug}`);
       setProduct(data);
     }
     getProduct();
