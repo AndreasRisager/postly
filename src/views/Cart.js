@@ -38,7 +38,7 @@ export default function Cart() {
                 </Link>
                 <p className="cartProduct__description">{item.description}</p>
                 <p className="cartProduct__description">
-                  Størrelse: {item.size}, Ramme: {item.frame}.
+                  Størrelse: {item.sizes.name}, Ramme: {item.frames.name}.
                 </p>
                 {item.message && <p className="cartProduct__description">Besked: {item.message}</p>}
                 <button

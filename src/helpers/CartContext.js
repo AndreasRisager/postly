@@ -22,22 +22,33 @@ export function CartProvider({ children }) {
       (item) =>
         item.id === product.id &&
         item.message === product.message &&
-        item.size === product.size &&
-        item.frame === product.frame
+        item.sizes.name === product.sizes.name &&
+        item.frames.name === product.frames.name
     );
     if (exist) {
       setCart((prevCart) => {
         return prevCart.map((item) =>
           item.id === product.id &&
           item.message === product.message &&
-          item.size === product.size &&
-          item.frame === product.frame
-            ? { ...exist, quantity: exist.quantity + 1 }
+          item.sizes.name === product.sizes.name &&
+          item.frames.name === product.frames.name
+            ? {
+                ...exist,
+                price: product.price + product.frames.price + product.sizes.price,
+                quantity: exist.quantity + 1,
+              }
             : item
         );
       });
     } else {
-      setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+      setCart((prevCart) => [
+        ...prevCart,
+        {
+          ...product,
+          price: product.price + product.frames.price + product.sizes.price,
+          quantity: 1,
+        },
+      ]);
     }
   }
 

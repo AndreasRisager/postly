@@ -19,7 +19,12 @@ export default function Levering({ checkout, setCheckout, nextStep, prevStep }) 
         <div className="checkout__review">
           <p className="checkout__review-label">Kontakt</p>
           <p className="checkout__review-value">{checkout.email}</p>
-          <button className="checkout__review-button">Skift</button>
+          <button
+            className="checkout__review-button"
+            type="button"
+            onClick={() => setCheckout({ ...checkout, step: 1 })}>
+            Skift
+          </button>
         </div>
         <div className="checkout__review">
           <p className="checkout__review-label">Send til</p>
@@ -28,7 +33,12 @@ export default function Levering({ checkout, setCheckout, nextStep, prevStep }) 
               checkout.shipping_address2 && `${checkout.shipping_address2},`
             } ${checkout.zip_code} ${checkout.city}, ${checkout.country}`}
           </p>
-          <button className="checkout__review-button">Skift</button>
+          <button
+            className="checkout__review-button"
+            type="button"
+            onClick={() => setCheckout({ ...checkout, step: 1 })}>
+            Skift
+          </button>
         </div>
       </div>
       <div className="checkout__section">
@@ -36,17 +46,17 @@ export default function Levering({ checkout, setCheckout, nextStep, prevStep }) 
         <RadioField
           name="delivery_method"
           id="delivery_method1"
-          value="PostNord Pakkeshop 1"
-          defaultChecked={checkout.delivery_method === "PostNord Pakkeshop 1"}
+          value="Gratis Levering"
+          defaultChecked={checkout.delivery_method === "Gratis Levering"}
           onClick={(e) => {
             setCheckout((prev) => ({
               ...prev,
               delivery_method: e.target.value,
-              delivery_price: 29.0,
+              delivery_price: 0.0,
             }));
           }}>
-          <div>PostNord Pakkeshop 1</div>
-          <div>29.00&nbsp;kr.</div>
+          <div>Gratis Levering</div>
+          <div>0.00&nbsp;kr.</div>
         </RadioField>
         <RadioField
           name="delivery_method"

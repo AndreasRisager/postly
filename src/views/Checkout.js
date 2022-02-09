@@ -8,17 +8,12 @@ import { useCheckout } from "../helpers/CheckoutContext";
 import { useCart } from "../helpers/CartContext";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { Redirect } from "@reach/router";
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC}`);
 
 export default function Checkout() {
   const { checkout, setCheckout } = useCheckout();
   const { totalPrice, isCartEmpty } = useCart();
-
-  if (isCartEmpty) {
-    return <Redirect to="/" noThrow />;
-  }
 
   const nextStep = () => {
     setCheckout({ ...checkout, step: checkout.step + 1 });
@@ -37,7 +32,12 @@ export default function Checkout() {
             <article className="checkout__wrapper">
               <section className="checkout__steps">
                 {checkout.step === 1 && (
-                  <ContactInfo checkout={checkout} setCheckout={setCheckout} nextStep={nextStep} />
+                  <ContactInfo
+                    checkout={checkout}
+                    setCheckout={setCheckout}
+                    nextStep={nextStep}
+                    isCartEmpty={isCartEmpty}
+                  />
                 )}
                 {checkout.step === 2 && (
                   <Levering
@@ -64,7 +64,7 @@ export default function Checkout() {
                   </p>
                   <p>
                     <span className="checkout__summary-text">Levering</span>
-                    {checkout.delivery_price ? (
+                    {checkout.delivery_price !== undefined ? (
                       <span className="checkout__summary-text">
                         {checkout.delivery_price.toFixed(2)}&nbsp;kr.
                       </span>
@@ -89,11 +89,6 @@ export default function Checkout() {
               </aside>
             </article>
           </>
-        )}
-        {checkout.step === 4 && (
-          <h1 className="checkout__heading" style={{ margin: "5em 0", textAlign: "center" }}>
-            Tak for dit køb!
-          </h1>
         )}
       </main>
     </Elements>

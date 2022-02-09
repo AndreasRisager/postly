@@ -11,6 +11,9 @@ img {
   width: 100%;
   height: auto;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   background-color: #fff;
   margin: 0 auto;

@@ -2,9 +2,14 @@ import CheckboxField from "../checkout/CheckboxField";
 import InputField from "../checkout/InputField";
 import { Link } from "@reach/router";
 import { useState } from "react";
+import { Redirect } from "@reach/router";
 
-export default function ContactInfo({ checkout, setCheckout, nextStep }) {
+export default function ContactInfo({ checkout, setCheckout, nextStep, isCartEmpty }) {
   const [statusMessage, setStatusMessage] = useState("");
+
+  if (isCartEmpty) {
+    return <Redirect to="/" noThrow />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

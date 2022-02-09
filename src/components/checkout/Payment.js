@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useCart } from "../../helpers/CartContext";
+import { Redirect } from "@reach/router";
 
 export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
   const [showBillingForm, setShowBillingForm] = useState(false);
@@ -84,7 +85,8 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       if (paymentIntent.status === "succeeded") {
         console.log("Tak for dit køb!");
         resetCart();
-        nextStep();
+        setCheckout({ ...checkout, step: 1 });
+        <Redirect to="/success" noThrow />;
       }
     } catch (error) {
       setIsProcessing(false);
@@ -109,7 +111,12 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         <div className="checkout__review">
           <p className="checkout__review-label">Kontakt</p>
           <p className="checkout__review-value">{checkout.email}</p>
-          <button className="checkout__review-button">Skift</button>
+          <button
+            className="checkout__review-button"
+            type="button"
+            onClick={() => setCheckout({ ...checkout, step: 1 })}>
+            Skift
+          </button>
         </div>
         <div className="checkout__review">
           <p className="checkout__review-label">Send til</p>
@@ -118,7 +125,12 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
               checkout.shipping_address2 && `${checkout.shipping_address2},`
             } ${checkout.zip_code} ${checkout.city}, ${checkout.country}`}
           </p>
-          <button className="checkout__review-button">Skift</button>
+          <button
+            className="checkout__review-button"
+            type="button"
+            onClick={() => setCheckout({ ...checkout, step: 1 })}>
+            Skift
+          </button>
         </div>
         <div className="checkout__review">
           <p className="checkout__review-label">Methode</p>
@@ -126,7 +138,12 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
             {checkout.delivery_method} &bull; {checkout.delivery_price.toFixed(2)}
             &nbsp;kr.
           </p>
-          <button className="checkout__review-button">Skift</button>
+          <button
+            className="checkout__review-button"
+            type="button"
+            onClick={() => setCheckout({ ...checkout, step: 2 })}>
+            Skift
+          </button>
         </div>
       </div>
       <div className="checkout__section">

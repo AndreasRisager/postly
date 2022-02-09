@@ -3,7 +3,9 @@ import "./PrimaryNavigation.scss";
 
 export default function PrimaryNavigation({ open }) {
   return (
-    <nav className={open ? "primaryNavigation primaryNavigation--open" : "primaryNavigation"} aria-label="Main menu">
+    <nav
+      className={open ? "primaryNavigation primaryNavigation--open" : "primaryNavigation"}
+      aria-label="Main menu">
       <ul className="primaryNavigation__list">
         <li>
           <Link to="/shop">Shop</Link>
@@ -12,13 +14,10 @@ export default function PrimaryNavigation({ open }) {
           <Link to="/">Find Inspiration</Link>
         </li>
         <li>
-          <Link to="/">Søde figurer</Link>
-        </li>
-        <li>
           <Link to="/">Købsguide</Link>
         </li>
         <li>
-          <Link to="/">Nyhedsbrev</Link>
+          <a href="#newsletter">Nyhedsbrev</a>
         </li>
         <li>
           <Link to="/">Om Postly.dk</Link>
