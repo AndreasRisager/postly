@@ -19,7 +19,7 @@ export default function ProductView({ slug }) {
         process.env.NODE_ENV === "development"
           ? "http://localhost:1337"
           : "https://postly-dk.herokuapp.com";
-      const { data } = await axios.get(`${BASE_URL}/${slug}`);
+      const { data } = await axios.get(`${BASE_URL}/products/${slug}`);
       setProduct(data);
     }
     getProduct();
