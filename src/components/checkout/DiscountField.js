@@ -10,7 +10,9 @@ export default function DiscountField({ setCheckout }) {
   async function handleDiscount(e) {
     e.preventDefault();
 
+    // reset
     setCheckout((prev) => ({ ...prev, discount: undefined }));
+    setDiscountError("");
 
     try {
       const { data } = await axios.get(`${BASE_URL}/discounts/${discountInput}`);
