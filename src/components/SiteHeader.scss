@@ -7,6 +7,14 @@
   border-bottom: 1px solid #dee2e6;
   position: relative;
   z-index: 10;
+  &__announcement {
+    background-color: $primaryColor;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 0.8em;
+    text-align: center;
+    z-index: 10;
+  }
   &__navigation {
     z-index: 10;
     background-color: white;

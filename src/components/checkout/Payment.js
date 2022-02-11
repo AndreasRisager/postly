@@ -4,9 +4,10 @@ import { useState } from "react";
 import axios from "axios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useCart } from "../../helpers/CartContext";
-import { Redirect } from "@reach/router";
+import { navigate } from "@reach/router";
+import { BASE_URL } from "../../utils/urls";
 
-export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
+export default function Payment({ checkout, setCheckout, prevStep }) {
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
@@ -56,11 +57,6 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
         };
 
     try {
-      const BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:1337"
-          : "https://postly-dk.herokuapp.com";
-
       const { data: clientSecret } = await axios.post(`${BASE_URL}/orders/`, {
         cart,
         checkout,
@@ -85,8 +81,7 @@ export default function Payment({ checkout, setCheckout, prevStep, nextStep }) {
       if (paymentIntent.status === "succeeded") {
         console.log("Tak for dit køb!");
         resetCart();
-        setCheckout({ ...checkout, step: 1 });
-        <Redirect to="/success" noThrow />;
+        navigate("/success");
       }
     } catch (error) {
       setIsProcessing(false);

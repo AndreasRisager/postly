@@ -28,6 +28,7 @@ export function CheckoutProvider({ children }) {
     billing_address2: "",
     billing_zip_code: "",
     billing_city: "",
+    discount: undefined,
   });
 
   const value = {

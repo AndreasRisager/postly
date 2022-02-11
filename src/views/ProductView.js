@@ -2,6 +2,7 @@ import { navigate } from "@reach/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCart } from "../helpers/CartContext";
+import { BASE_URL } from "../utils/urls";
 import "./ProductView.scss";
 
 export default function ProductView({ slug }) {
@@ -15,10 +16,6 @@ export default function ProductView({ slug }) {
 
   useEffect(() => {
     async function getProduct() {
-      const BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:1337"
-          : "https://postly-dk.herokuapp.com";
       const { data } = await axios.get(`${BASE_URL}/products/${slug}`);
       setProduct(data);
     }
