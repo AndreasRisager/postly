@@ -6,9 +6,12 @@ import FilterShop from "../components/FilterShop";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [listView, setListView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
+  const [priceLimit, setPriceLimit] = useState(undefined);
+  const [category, setCategory] = useState(undefined);
 
   useEffect(() => {
     async function getProducts() {
@@ -16,6 +19,7 @@ export default function Shop() {
       try {
         const { data } = await axios.get(`https://postly-dk.herokuapp.com/products`);
         setProducts(data);
+        setFiltered(data);
       } catch (error) {
         console.log(error);
       }
@@ -33,7 +37,7 @@ export default function Shop() {
         onClick={() => setOpenFilterMenu(!openFilterMenu)}>
         Filter <i className="fas fa-funnel-dollar" />
       </button>
-      <FilterShop open={openFilterMenu} />
+      <FilterShop open={openFilterMenu} setFiltered={setFiltered} products={products} category={category} setCategory={setCategory} priceLimit={priceLimit} setPriceLimit={setPriceLimit} />
       <div>
         <section className="shopSorting">
           <div className="shopSorting__views">
@@ -41,20 +45,16 @@ export default function Shop() {
               className={`shopSorting__view${listView ? "" : " shopSorting__view--active"}`}
               onClick={() => setListView(false)}
               aria-label="change to product grid view">
-              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 2.5A1.5 1.5 0 012.5 1h3A1.5 1.5 0 017 2.5v3A1.5 1.5 0 015.5 7h-3A1.5 1.5 0 011 5.5v-3zm8 0A1.5 1.5 0 0110.5 1h3A1.5 1.5 0 0115 2.5v3A1.5 1.5 0 0113.5 7h-3A1.5 1.5 0 019 5.5v-3zm-8 8A1.5 1.5 0 012.5 9h3A1.5 1.5 0 017 10.5v3A1.5 1.5 0 015.5 15h-3A1.5 1.5 0 011 13.5v-3zm8 0A1.5 1.5 0 0110.5 9h3a1.5 1.5 0 011.5 1.5v3a1.5 1.5 0 01-1.5 1.5h-3A1.5 1.5 0 019 13.5v-3z"></path>
-              </svg>
+              <i className="fas fa-th-large" />
             </button>
             <button
               className={`shopSorting__view${listView ? " shopSorting__view--active" : ""}`}
               onClick={() => setListView(true)}
               aria-label="change to product list view">
-              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"></path>
-              </svg>
+              <i className="fas fa-bars" />
             </button>
           </div>
-          <p>{products.length} Produkter</p>
+          <p>{filtered.length} Produkter</p>
           <div className="shopSorting__line" />
           <form className="shopSorting__sort">
             <label htmlFor="sort">Sorter efter</label>
@@ -68,11 +68,11 @@ export default function Shop() {
         </section>
         <section className="shopProducts">
           {loading && <h4>Loading...</h4>}
-          {!loading && products.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <h4>Beklager, ingen produkter matchede din søgning.</h4>
           )}
           <div className={listView ? "products productsList" : "products"}>
-            {products.map((product) => (
+            {filtered.map((product) => (
               <Product product={product} key={product.id} listView={listView} />
             ))}
           </div>
