@@ -13,20 +13,7 @@ import {Helmet} from "react-helmet";
 export default function App() {
   return (
     <>
-      <Helmet defaultTitle="Postly" titleTemplate="Postly | %s" >
-        <meta name="description" content="Se vores udvalg af fantastiske plakater fra postly." />
-        <meta property="og:url" content="https://postly.netlify.app/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Postly" />
-        <meta property="og:description" content="Se vores udvalg af fantastiske plakater fra postly." />
-        <meta property="og:image" content="https://res.cloudinary.com/dffpafuyg/image/upload/v1644252262/photo_1513519245088_0e12902e5a38_ixlib_rb_1_2_8fdfa3b08f.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="postly.netlify.app" />
-        <meta property="twitter:url" content="https://postly.netlify.app/" />
-        <meta name="twitter:title" content="Postly" />
-        <meta name="twitter:description" content="Se vores udvalg af fantastiske plakater fra postly." />
-        <meta name="twitter:image" content="https://res.cloudinary.com/dffpafuyg/image/upload/v1644252262/photo_1513519245088_0e12902e5a38_ixlib_rb_1_2_8fdfa3b08f.jpg" />
-      </Helmet>
+      <Helmet defaultTitle="Postly" titleTemplate="Postly | %s" />
       <SiteHeader />
       <Router>
         <Home path="/" default />
