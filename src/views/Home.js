@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <meta name="title" content="Postly" />
+        <title>Postly</title>
       </Helmet>
       <ImageSlider />
       <main className="home">

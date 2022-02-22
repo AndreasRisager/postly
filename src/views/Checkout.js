@@ -27,7 +27,7 @@ export default function Checkout() {
   return (
     <>
       <Helmet>
-        <meta name="title" content="Postly | Checkout" />
+        <title>Checkout</title>
       </Helmet>
       <main className="checkout">
         {checkout.step !== 4 && (

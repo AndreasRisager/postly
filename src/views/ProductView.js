@@ -39,7 +39,7 @@ export default function ProductView({ slug }) {
   return (
     <>
       <Helmet>
-        <meta name="title" content={`Postly | ${product.title}`} />
+        <title>{product.title}</title>
         <meta name="description" content={`Fremragende '${product.title}' plakat.  Køb online hos POSTLY.`} />
 
         <meta property="og:url" content={`https://postly.netlify.app/product/${product.slug}`} />

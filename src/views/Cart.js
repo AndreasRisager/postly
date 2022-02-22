@@ -10,7 +10,7 @@ export default function Cart() {
     return (
       <>
         <Helmet>
-          <meta name="title" content="Postly | Empty Cart" />
+          <title>Empty Cart</title>
         </Helmet>
         <div className="cartEmpty">
           <i className="fab fa-opencart cartEmpty__icon" />
@@ -25,7 +25,7 @@ export default function Cart() {
   return (
     <>
       <Helmet>
-        <title>Postly | Cart</title>
+        <title>Cart</title>
       </Helmet>
       <main className="cart">
         <h1>Din indkøbskurv</h1>

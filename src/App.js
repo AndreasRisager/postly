@@ -8,10 +8,12 @@ import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import Checkout from "./views/Checkout";
 import Success from "./views/Success";
+import {Helmet} from "react-helmet";
 
 export default function App() {
   return (
     <>
+      <Helmet defaultTitle="Postly" titleTemplate="Postly | %s" />
       <SiteHeader />
       <Router>
         <Home path="/" default />
