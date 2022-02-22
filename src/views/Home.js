@@ -4,6 +4,7 @@ import ImageSlider from "../components/ImageSlider";
 import Newsletter from "../components/Newsletter";
 import Product from "../components/Product";
 import "./Home.scss";
+import {Helmet} from "react-helmet";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -21,6 +22,9 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>Postly</title>
+      </Helmet>
       <ImageSlider />
       <main className="home">
         <section className="featured">

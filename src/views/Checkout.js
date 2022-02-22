@@ -9,6 +9,7 @@ import { useCart } from "../helpers/CartContext";
 import DiscountField from "../components/checkout/DiscountField";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import {Helmet} from "react-helmet";
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC}`);
 
@@ -25,6 +26,9 @@ export default function Checkout() {
 
   return (
     <main className="checkout">
+      <Helmet>
+        <title>Postly | Checkout</title>
+      </Helmet>
       {checkout.step !== 4 && (
         <>
           <h1 className="checkout__heading">Kassen</h1>
