@@ -32,7 +32,7 @@ export default function Shop() {
   return (
     <>
       <Helmet>
-        <title>Postly | Shop</title>
+        <meta name="title" content="Postly | Shop" />
       </Helmet>
       <main className="shop">
         <button
