@@ -10,13 +10,13 @@ export default function Newsletter() {
         Tilmeld dig for at modtage produktrabatter, produktnyheder og mere i din indbakke
       </p>
       <form className="newsletter__form">
-        <label htmlFor="newsletter" className="screenreader">
+        <label htmlFor="newsletterForm" className="screenreader">
           email
         </label>
         <input
           type="email"
-          name="newsletter"
-          id="newsletter"
+          name="newsletterForm"
+          id="newsletterForm"
           className="newsletter__input"
           placeholder="E-mailadresse"
         />

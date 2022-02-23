@@ -6,7 +6,7 @@ export default function SiteFooter() {
     <footer className="siteFooter">
       <div className="siteFooter__content">
         <div className="siteFooter__column">
-          <h4 className="siteFooter__title">Postly.dk</h4>
+          <h3 className="siteFooter__title">Postly.dk</h3>
           <p className="siteFooter__text">
             Postly.dk
             <br />
@@ -21,7 +21,7 @@ export default function SiteFooter() {
           </a>
         </div>
         <div className="siteFooter__column">
-          <h4 className="siteFooter__title">Kundeservice</h4>
+          <h3 className="siteFooter__title">Kundeservice</h3>
           <p className="siteFooter__text">
             Kontakt mig gerne på <br />
             <a href="mailto:kontakt@postly.dk" className="siteFooter__link" title="mailto:kontakt@postly.dk" aria-describedby="a11y-external-message">
@@ -31,7 +31,7 @@ export default function SiteFooter() {
           <p className="siteFooter__text">Jeg besvarer din mail indenfor 24 timer, mandag til fredag.</p>
         </div>
         <div className="siteFooter__column">
-          <h4 className="siteFooter__title">Yderligere service</h4>
+          <h3 className="siteFooter__title">Yderligere service</h3>
           <Link to="/giftcard" className="siteFooter__link">
             Gavekort
           </Link>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
           </Link>
         </div>
         <div className="siteFooter__column">
-          <h4 className="siteFooter__title">Nyhedsbrev</h4>
+          <h3 className="siteFooter__title">Nyhedsbrev</h3>
           <form>
             <label htmlFor="footer-newsletter" className="screenreader"></label>
             <input type="email" name="footer-newsletter" id="footer-newsletter" placeholder="E-mailadresse" className="newsletter__input" />
