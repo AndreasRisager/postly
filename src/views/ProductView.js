@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useCart } from "../helpers/CartContext";
 import { BASE_URL } from "../utils/urls";
 import "./ProductView.scss";
-import {Helmet} from "react-helmet";
 
 export default function ProductView({ slug }) {
   const { addToCart } = useCart();
@@ -38,20 +37,6 @@ export default function ProductView({ slug }) {
 
   return (
     <>
-      <Helmet>
-        <title>{product.title}</title>
-        <meta name="description" content={`Fremragende '${product.title}' plakat.  Køb online hos POSTLY.`} />
-
-        <meta property="og:url" content={`https://postly.netlify.app/product/${product.slug}`} />
-        <meta property="og:title" content={`Postly | ${product.title}`} />
-        <meta property="og:description" content={`Fremragende '${product.title}' plakat.  Køb online hos POSTLY.`} />
-        <meta property="og:image" content={product.image?.url} />
-
-        <meta property="twitter:url" content={`https://postly.netlify.app/product/${product.slug}`} />
-        <meta name="twitter:title" content={`Postly | ${product.title}`} />
-        <meta name="twitter:description" content={`Fremragende '${product.title}' plakat.  Køb online hos POSTLY.`} />
-        <meta name="twitter:image" content={product.image?.url} />
-      </Helmet>
       <main className="productPage">
         <section className="productView">
           <img src={product.image?.url} alt={product.title} className="productView__image" />

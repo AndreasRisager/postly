@@ -1,7 +1,6 @@
 import { useCart } from "../helpers/CartContext";
 import "./Cart.scss";
 import { Link } from "@reach/router";
-import {Helmet} from "react-helmet";
 
 export default function Cart() {
   const { cart, isCartEmpty, removeFromCart, totalPrice, updateItemQuantity } = useCart();
@@ -9,9 +8,6 @@ export default function Cart() {
   if (isCartEmpty)
     return (
       <>
-        <Helmet>
-          <title>Empty Cart</title>
-        </Helmet>
         <div className="cartEmpty">
           <i className="fab fa-opencart cartEmpty__icon" />
           <h1 className="cartEmpty__heading">Din indkøbskurv er tom!</h1>
@@ -24,9 +20,6 @@ export default function Cart() {
 
   return (
     <>
-      <Helmet>
-        <title>Cart</title>
-      </Helmet>
       <main className="cart">
         <h1>Din indkøbskurv</h1>
         <section className="cart__products">

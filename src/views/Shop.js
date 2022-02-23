@@ -3,7 +3,6 @@ import "./Shop.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FilterShop from "../components/FilterShop";
-import {Helmet} from "react-helmet";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -31,9 +30,6 @@ export default function Shop() {
 
   return (
     <>
-      <Helmet>
-        <title>Shop</title>
-      </Helmet>
       <main className="shop">
         <button
           className={

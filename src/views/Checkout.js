@@ -9,7 +9,6 @@ import { useCart } from "../helpers/CartContext";
 import DiscountField from "../components/checkout/DiscountField";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import {Helmet} from "react-helmet";
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC}`);
 
@@ -26,9 +25,6 @@ export default function Checkout() {
 
   return (
     <>
-      <Helmet>
-        <title>Checkout</title>
-      </Helmet>
       <main className="checkout">
         {checkout.step !== 4 && (
           <>
