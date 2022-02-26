@@ -34,14 +34,16 @@ export default function Cart() {
               <div className="cartProduct__product">
                 <img src={item.image?.url} alt={item.title} className="cartProduct__image" />
                 <div className="cartProduct__info">
-                  <Link to={`/product/${item.slug}`}>
-                    <h3 className="cartProduct__title">{item.title}</h3>
-                  </Link>
+                  <h3 className="cartProduct__title">
+                    <Link to={`/product/${item.slug}`}>{item.title}</Link>
+                  </h3>
                   <p className="cartProduct__description">{item.description}</p>
                   <p className="cartProduct__description">
                     Størrelse: {item.sizes.name}, Ramme: {item.frames.name}.
                   </p>
-                  {item.message && <p className="cartProduct__description">Besked: {item.message}</p>}
+                  {item.message && (
+                    <p className="cartProduct__description">Besked: {item.message}</p>
+                  )}
                   <button
                     className="cartProduct__remove"
                     onClick={() => removeFromCart(item)}

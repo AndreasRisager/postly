@@ -79,6 +79,14 @@ export default function Payment({ checkout, setCheckout, prevStep }) {
         return;
       }
       if (paymentIntent.status === "succeeded") {
+        try {
+          const { data } = await axios.post(`${BASE_URL}/orders/confirm`, {
+            paymentIntent,
+          });
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
         console.log("Tak for dit køb!");
         resetCart();
         navigate("/success");

@@ -16,6 +16,7 @@
   &__products {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     display: grid;
+    align-items: end;
     grid-gap: 1em 5px;
   }
 }
