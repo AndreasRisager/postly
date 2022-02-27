@@ -1,8 +1,21 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import RadioField from "../checkout/RadioField";
+import XMLParser from "react-xml-parser";
 
 export default function Levering({ checkout, setCheckout, nextStep, prevStep }) {
   const [statusMessage, setStatusMessage] = useState("");
+  const [shipping, setShipping] = useState([]);
+  useEffect(() => {
+    async function getShipping() {
+      const { data } = await axios.get(
+        `http://www.gls.dk/webservices_v4/wsShopFinder.asmx/GetParcelShopDropPoint?street=${checkout.shipping_address1} ${checkout.shipping_address2}&zipcode=${checkout.zip_code}&countryIso3166A2=${checkout.country}&Amount=5`
+      );
+      var xml = new XMLParser().parseFromString(data);
+      setShipping(xml.children[1].children);
+    }
+    getShipping();
+  }, [checkout]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,50 +56,42 @@ export default function Levering({ checkout, setCheckout, nextStep, prevStep }) 
       </div>
       <div className="checkout__section">
         <h2 className="checkout__title">Leveringsmetode</h2>
+        {shipping.map((data) => {
+          const pakkeshop = data.children;
+          const address = `${pakkeshop[1].value}, ${pakkeshop[2].value}, ${pakkeshop[4].value} ${pakkeshop[5].value}`;
+          return (
+            <RadioField
+              key={pakkeshop[0].value}
+              name="delivery_method"
+              id={pakkeshop[0].value}
+              value={address}
+              defaultChecked={checkout.delivery_method === address}
+              onClick={(e) => {
+                setCheckout((prev) => ({
+                  ...prev,
+                  delivery_method: e.target.value,
+                  delivery_price: 29.0,
+                }));
+              }}>
+              <div>GLS Pakkeshop - {address}</div>
+              <div>29.00&nbsp;kr.</div>
+            </RadioField>
+          );
+        })}
         <RadioField
           name="delivery_method"
           id="delivery_method1"
-          value="Gratis Levering"
-          defaultChecked={checkout.delivery_method === "Gratis Levering"}
+          value="GLS Hjemmelevering"
+          defaultChecked={checkout.delivery_method === "GLS Hjemmelevering"}
           onClick={(e) => {
             setCheckout((prev) => ({
               ...prev,
               delivery_method: e.target.value,
-              delivery_price: 0.0,
+              delivery_price: 45.0,
             }));
           }}>
-          <div>Gratis Levering</div>
-          <div>0.00&nbsp;kr.</div>
-        </RadioField>
-        <RadioField
-          name="delivery_method"
-          id="delivery_method2"
-          value="PostNord Pakkeshop 2"
-          defaultChecked={checkout.delivery_method === "PostNord Pakkeshop 2"}
-          onClick={(e) => {
-            setCheckout((prev) => ({
-              ...prev,
-              delivery_method: e.target.value,
-              delivery_price: 29.0,
-            }));
-          }}>
-          <div>PostNord Pakkeshop 2</div>
-          <div>29.00&nbsp;kr.</div>
-        </RadioField>
-        <RadioField
-          name="delivery_method"
-          id="delivery_method3"
-          value="PostNord Pakkeshop 3"
-          defaultChecked={checkout.delivery_method === "PostNord Pakkeshop 3"}
-          onClick={(e) => {
-            setCheckout((prev) => ({
-              ...prev,
-              delivery_method: e.target.value,
-              delivery_price: 35.0,
-            }));
-          }}>
-          <div>PostNord Pakkeshop 3</div>
-          <div>35.00&nbsp;kr.</div>
+          <div>GLS Hjemmelevering</div>
+          <div>45.00&nbsp;kr.</div>
         </RadioField>
       </div>
       {statusMessage && <p className="checkout__statusMessage">*{statusMessage}*</p>}

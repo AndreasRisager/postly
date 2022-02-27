@@ -8,6 +8,9 @@ import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import Checkout from "./views/Checkout";
 import Success from "./views/Success";
+import CookieConsent from "./components/CookieConsent/CookieConsent";
+import PrivacyPolicy from "./views/policies/PrivacyPolicy";
+import TermsOfService from "./views/policies/TermsOfService";
 
 export default function App() {
   return (
@@ -20,8 +23,12 @@ export default function App() {
         <Shop path="/shop" />
         <Checkout path="/checkout" />
         <Success path="/success" />
+
+        <PrivacyPolicy path="/privacy-policy" />
+        <TermsOfService path="/terms-of-service" />
       </Router>
       <SiteFooter />
+      {!localStorage.getItem("cookieConsent") && <CookieConsent />}
     </>
   );
 }
