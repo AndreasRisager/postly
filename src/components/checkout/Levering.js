@@ -9,7 +9,7 @@ export default function Levering({ checkout, setCheckout, nextStep, prevStep }) 
   useEffect(() => {
     async function getShipping() {
       const { data } = await axios.get(
-        `http://www.gls.dk/webservices_v4/wsShopFinder.asmx/GetParcelShopDropPoint?street=${checkout.shipping_address1} ${checkout.shipping_address2}&zipcode=${checkout.zip_code}&countryIso3166A2=${checkout.country}&Amount=5`
+        `https://www.gls.dk/webservices_v4/wsShopFinder.asmx/GetParcelShopDropPoint?street=${checkout.shipping_address1} ${checkout.shipping_address2}&zipcode=${checkout.zip_code}&countryIso3166A2=${checkout.country}&Amount=5`
       );
       var xml = new XMLParser().parseFromString(data);
       setShipping(xml.children[1].children);
