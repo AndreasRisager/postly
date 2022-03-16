@@ -46,7 +46,12 @@ export default function Policy({ announcement, policy }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/policies`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/policies`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const data = await res.json();
 
   const paths = data.map((policy) => ({

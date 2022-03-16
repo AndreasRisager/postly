@@ -171,7 +171,12 @@ function Product({ product, announcement, frames, sizes }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const data = await res.json();
 
   const paths = data.map((product) => ({
