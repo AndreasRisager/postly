@@ -175,7 +175,7 @@ export async function getStaticPaths() {
   const products = await getProducts();
 
   const paths = products.map((product) => ({
-    params: { slug: product.slug },
+    params: { slug: `${product.slug}` },
   }));
 
   return { paths, fallback: false };
@@ -186,7 +186,7 @@ export async function getStaticProps({ params }) {
   const product = await getProductBySlug(params.slug);
   const { frames, sizes } = await getProductVariations();
 
-  return { props: { product, announcement, frames, sizes } };
+  return { props: { product, announcement, frames, sizes }, revalidate: 60 };
 }
 
 export default Product;

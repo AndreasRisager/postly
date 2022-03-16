@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   const policies = await getPolicies();
 
   const paths = policies.map((policy) => ({
-    params: { slug: policy.slug },
+    params: { slug: `${policy.slug}` },
   }));
 
   return { paths, fallback: false };
@@ -60,5 +60,5 @@ export async function getStaticProps({ params }) {
   const announcement = await getAnnouncement();
   const policy = await getPolicyBySlug(params.slug);
 
-  return { props: { announcement, policy } };
+  return { props: { announcement, policy }, revalidate: 60 };
 }
