@@ -1,7 +1,6 @@
 import Announcement from "../../components/layout/Announcement";
 import Layout from "../../components/layout/Layout";
 import { getAnnouncement } from "../../lib/getAnnouncement";
-import { getPolicies } from "../../lib/getPolicies";
 import { getPolicyBySlug } from "../../lib/getPolicyBySlug";
 import Markdown from "markdown-to-jsx";
 import Link from "next/link";
@@ -47,9 +46,10 @@ export default function Policy({ announcement, policy }) {
 }
 
 export async function getStaticPaths() {
-  const policies = await getPolicies();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/policies`);
+  const data = await res.json();
 
-  const paths = policies.map((policy) => ({
+  const paths = data.map((policy) => ({
     params: { slug: `${policy.slug}` },
   }));
 

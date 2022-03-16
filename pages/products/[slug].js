@@ -6,7 +6,6 @@ import Announcement from "../../components/layout/Announcement";
 import Image from "next/image";
 import Head from "next/head";
 import { getProductBySlug } from "../../lib/getProductBySlug";
-import { getProducts } from "../../lib/getProducts";
 import { getProductVariations } from "../../lib/getProductVariations";
 
 function Product({ product, announcement, frames, sizes }) {
@@ -172,9 +171,10 @@ function Product({ product, announcement, frames, sizes }) {
 }
 
 export async function getStaticPaths() {
-  const products = await getProducts();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+  const data = await res.json();
 
-  const paths = products.map((product) => ({
+  const paths = data.map((product) => ({
     params: { slug: `${product.slug}` },
   }));
 
