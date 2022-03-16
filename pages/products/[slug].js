@@ -7,6 +7,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { getProductBySlug } from "../../lib/getProductBySlug";
 import { getProductVariations } from "../../lib/getProductVariations";
+import { getProducts } from "../../lib/getProducts";
 
 function Product({ product, announcement, frames, sizes }) {
   const { addToCart } = useCart();
@@ -171,13 +172,7 @@ function Product({ product, announcement, frames, sizes }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const products = await res.json();
+  const products = await getProducts();
   const paths = products.map((product) => {
     return {
       params: { slug: `${product.slug}` },

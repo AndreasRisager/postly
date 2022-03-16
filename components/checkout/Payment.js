@@ -6,6 +6,7 @@ import SelectField from "../layout/SelectField";
 import Review from "./Review";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
+import { CgSpinner } from "react-icons/cg";
 
 export default function Payment({ state, prevStep, formatttedAddress, setStep, session }) {
   const { cart, resetCart, isCartEmpty } = useCart();
@@ -311,13 +312,23 @@ export default function Payment({ state, prevStep, formatttedAddress, setStep, s
         </div>
       </section>
 
-      <p className="text-red-700 italic my-2 h-6">{statusMessage}</p>
+      <p className="text-red-700 italic my-2 min-h-6">{statusMessage}</p>
       <div className="flex flex-wrap gap-y-4 items-center justify-between">
         <button className="text-checkoutActiveColor" type="button" onClick={prevStep}>
           Tilbage til levering
         </button>
-        <button className="bg-checkoutActiveColor text-black p-3.5 rounded-md" type="submit">
-          {isProcessing ? "Behandler ordren" : "Fuldfør ordren"}
+        <button
+          className="bg-checkoutActiveColor text-black p-3.5 rounded-md disabled:bg-gray-300 disabled:cursor-not-allowed"
+          type="submit"
+          disabled={isProcessing || isCartEmpty || !stripe}>
+          {isProcessing ? (
+            <p className="flex">
+              <CgSpinner className="animate-spin h-6 w-6 mr-2" />
+              Behandler...
+            </p>
+          ) : (
+            "Fuldfør ordren"
+          )}
         </button>
       </div>
     </form>
