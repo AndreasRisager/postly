@@ -186,7 +186,7 @@ export async function getStaticProps({ params }) {
   const product = await getProductBySlug(params.slug);
   const { frames, sizes } = await getProductVariations();
 
-  return { props: { product, announcement, frames, sizes }, revalidate: 60 };
+  return { props: { product, announcement, frames, sizes } };
 }
 
 export default Product;

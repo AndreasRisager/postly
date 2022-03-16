@@ -124,7 +124,7 @@ function Profile({ announcement }) {
 export async function getStaticProps() {
   const announcement = await getAnnouncement();
 
-  return { props: { announcement }, revalidate: 60 };
+  return { props: { announcement } };
 }
 
 export default Profile;

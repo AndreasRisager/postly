@@ -60,5 +60,5 @@ export async function getStaticProps({ params }) {
   const announcement = await getAnnouncement();
   const policy = await getPolicyBySlug(params.slug);
 
-  return { props: { announcement, policy }, revalidate: 60 };
+  return { props: { announcement, policy } };
 }

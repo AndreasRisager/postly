@@ -34,7 +34,7 @@ export async function getStaticProps() {
   const slides = await getSlides();
   const products = await getCategoryBySlug("udvalgte");
 
-  return { props: { announcement, slides, products }, revalidate: 60 };
+  return { props: { announcement, slides, products } };
 }
 
 export default Home;
