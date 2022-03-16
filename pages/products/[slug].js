@@ -31,7 +31,7 @@ function Product({ product, announcement, frames, sizes }) {
   return (
     <>
       <Head>
-        <title>'{product.title}' Plakat - Postly</title>
+        <title>{`'${product.title}' Plakat - Postly`}</title>
         <meta name="description" content={product.description} />
         <link rel="canonical" href={`https://postly.netlify.app/${product.slug}`} />
 

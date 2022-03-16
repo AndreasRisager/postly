@@ -15,14 +15,14 @@ import Head from "next/head";
 
 const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLIC}`);
 
-export default function checkout({ announcement }) {
+export default function Checkout({ announcement }) {
   const { data: session } = useSession();
   const router = useRouter();
 
   useEffect(() => {
     if (session) return;
     router.push(`/auth/login?from=${router.asPath}`);
-  }, [session]);
+  }, [session, router]);
 
   const [step, setStep] = useState(1);
   const [state, setState] = useState({

@@ -10,6 +10,7 @@ import Link from "next/link";
 import Announcement from "../components/layout/Announcement";
 import { getAnnouncement } from "../lib/getAnnouncement";
 import Head from "next/head";
+import Image from "next/image";
 
 function Profile({ announcement }) {
   const { data: session, status } = useSession();
@@ -20,7 +21,7 @@ function Profile({ announcement }) {
     if (status === "unauthenticated") {
       router.push(`/auth/login?from=${router.asPath}`);
     }
-  }, [status]);
+  }, [status, router]);
 
   const user = session?.user?.data;
 
@@ -44,10 +45,12 @@ function Profile({ announcement }) {
           <div className="sm:flex gap-8 my-10 max-w-5xl mx-auto">
             <aside className="sm:max-w-[250px]">
               <div className="flex items-center mb-6 truncate">
-                <img
+                <div className="w-12 h-12 rounded-full overflow-hidden"></div>
+                <Image
                   src={session.user.image}
+                  height="48"
+                  width="48"
                   alt={"profile pic of " + session.user.name}
-                  className="w-12 h-12 rounded-full"
                 />
                 <div className="ml-2 truncate">
                   <h2 className="text-base text-black font-medium truncate capitalize">
@@ -62,41 +65,47 @@ function Profile({ announcement }) {
                     pathname: router.pathname,
                     query: { ...router.query, page: 1 },
                   }}>
-                  <div className="flex items-center px-2 py-3 border-b border-inputBorder hover:bg-slate-100 rounded-t-md cursor-pointer">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-black">Mine Ordrer</h3>
-                      <p className="text-gray-500 text-sm">Her er dine ordrer</p>
+                  <a>
+                    <div className="flex items-center px-2 py-3 border-b border-inputBorder hover:bg-slate-100 rounded-t-md cursor-pointer">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-black">Mine Ordrer</h3>
+                        <p className="text-gray-500 text-sm">Her er dine ordrer</p>
+                      </div>
+                      <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
                     </div>
-                    <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
-                  </div>
+                  </a>
                 </Link>
                 <Link
                   href={{
                     pathname: router.pathname,
                     query: { ...router.query, page: 2 },
                   }}>
-                  <div className="flex items-center px-2 py-3 border-b border-inputBorder hover:bg-slate-100 cursor-pointer">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-black">Leveringsadresse</h3>
-                      <p className="text-gray-500 text-sm">
-                        {formatAddress.trim() ? formatAddress : "Ingen adresse"}
-                      </p>
+                  <a>
+                    <div className="flex items-center px-2 py-3 border-b border-inputBorder hover:bg-slate-100 cursor-pointer">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-black">Leveringsadresse</h3>
+                        <p className="text-gray-500 text-sm">
+                          {formatAddress.trim() ? formatAddress : "Ingen adresse"}
+                        </p>
+                      </div>
+                      <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
                     </div>
-                    <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
-                  </div>
+                  </a>
                 </Link>
                 <Link
                   href={{
                     pathname: router.pathname,
                     query: { ...router.query, page: 3 },
                   }}>
-                  <div className="flex items-center px-2 py-3 hover:bg-slate-100 rounded-b-md cursor-pointer">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-black">Konto</h3>
-                      <p className="text-gray-500 text-sm">Log ud, Instillinger</p>
+                  <a>
+                    <div className="flex items-center px-2 py-3 hover:bg-slate-100 rounded-b-md cursor-pointer">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-black">Konto</h3>
+                        <p className="text-gray-500 text-sm">Log ud, Instillinger</p>
+                      </div>
+                      <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
                     </div>
-                    <ChevronRightIcon className="w-6 h-6 text-inputBorder" />
-                  </div>
+                  </a>
                 </Link>
               </div>
             </aside>

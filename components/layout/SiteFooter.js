@@ -100,14 +100,18 @@ export default function SiteFooter() {
       <div className="max-w-7xl mx-auto p-8">
         <ul className="flex py-4">
           <li className="pr-4">
-            <a href="/">
-              <FaFacebookSquare className="text-2xl" />
-            </a>
+            <Link href="/">
+              <a>
+                <FaFacebookSquare className="text-2xl" />
+              </a>
+            </Link>
           </li>
           <li className="pr-4">
-            <a href="/">
-              <FaInstagram className="text-2xl" />
-            </a>
+            <Link href="/">
+              <a>
+                <FaInstagram className="text-2xl" />
+              </a>
+            </Link>
           </li>
         </ul>
         <p className="mb-5">&copy; 2022, Postly.dk</p>

@@ -5,6 +5,7 @@ import { ShoppingBagIcon, UserIcon } from "@heroicons/react/solid";
 import { SearchIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import PrimaryNavigation from "./PrimaryNavigation";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function SiteHeader() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -26,7 +27,12 @@ export default function SiteHeader() {
             <Link href="/profile">
               <a className="h-6 w-6 rounded-full overflow-hidden">
                 {session ? (
-                  <img src={session.user.image} alt={"profile pic of " + session.user.name} />
+                  <Image
+                    src={session.user.image}
+                    height="24"
+                    width="24"
+                    alt={"profile pic of " + session.user.name}
+                  />
                 ) : (
                   <UserIcon className="h-6 w-6 cursor-pointer" />
                 )}

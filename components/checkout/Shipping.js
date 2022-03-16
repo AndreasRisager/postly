@@ -41,7 +41,8 @@ export default function Shipping({
       });
     }
     getShipping();
-  }, []);
+    // eslint-disable-next-line
+  }, [country, state.zip, street]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

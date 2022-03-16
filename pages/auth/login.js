@@ -12,7 +12,7 @@ function Login({ providers }) {
     if (status === "authenticated") {
       router.push(from ? from : "/");
     }
-  }, [status]);
+  }, [status, from, router]);
 
   return (
     <Layout>

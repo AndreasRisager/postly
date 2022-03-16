@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Orders() {
@@ -20,7 +21,7 @@ export default function Orders() {
       }
     };
     getOrders();
-  }, []);
+  }, [session.jwt]);
 
   return (
     <>
@@ -70,7 +71,12 @@ export default function Orders() {
               return (
                 <div key={product.id} className="grid grid-cols-[100px_1fr] mt-3">
                   <div className="rounded overflow-hidden">
-                    <img src={product.image.url} alt="" />
+                    <Image
+                      src={product.image.url}
+                      width={product.image.width}
+                      height={product.image.height}
+                      alt={product.title}
+                    />
                   </div>
                   <div className="ml-2">
                     <h3 className="text-xl">

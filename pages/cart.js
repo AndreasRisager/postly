@@ -6,7 +6,7 @@ import { getAnnouncement } from "../lib/getAnnouncement";
 import Announcement from "../components/layout/Announcement";
 import Head from "next/head";
 
-export default function cart({ announcement }) {
+export default function Cart({ announcement }) {
   const { cart, isCartEmpty, removeFromCart, totalPrice, updateItemQuantity } = useCart();
 
   return (

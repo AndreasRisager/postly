@@ -27,12 +27,16 @@ export default function PrimaryNavigation({ open }) {
           <Link href="/">Kundeservice</Link>
         </li>
         <li className="flex gap-5">
-          <a href="/">
-            <FaFacebookSquare className="text-xl" />
-          </a>
-          <a href="/">
-            <FaInstagram className="text-xl" />
-          </a>
+          <Link href="/">
+            <a>
+              <FaFacebookSquare className="text-xl" />
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <FaInstagram className="text-xl" />
+            </a>
+          </Link>
         </li>
       </ul>
     </nav>
