@@ -174,7 +174,7 @@ function Product({ product, announcement, frames, sizes }) {
 export async function getStaticPaths() {
   const products = await getProducts();
 
-  const paths = products?.map((product) => ({
+  const paths = products.map((product) => ({
     params: { slug: product.slug },
   }));
 

@@ -25,9 +25,9 @@ export default NextAuth({
       }
       return Promise.resolve(token);
     },
-    session: async ({ session, token, user }) => {
+    session: async ({ session, token }) => {
       // get user data from strapi
-      const response = await fetch(`http://localhost:1337/users/me`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
         method: "GET",
         headers: {
           Accept: "application/json",
