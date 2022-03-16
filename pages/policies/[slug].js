@@ -52,13 +52,16 @@ export async function getStaticPaths() {
       "Content-Type": "application/json",
     },
   });
-  const data = await res.json();
-
-  const paths = data.map((policy) => ({
-    params: { slug: `${policy.slug}` },
-  }));
-
-  return { paths, fallback: false };
+  const policies = await res.json();
+  const paths = policies.map((policy) => {
+    return {
+      params: { slug: `${policy.slug}` },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {

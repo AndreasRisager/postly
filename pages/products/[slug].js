@@ -177,13 +177,16 @@ export async function getStaticPaths() {
       "Content-Type": "application/json",
     },
   });
-  const data = await res.json();
-
-  const paths = data.map((product) => ({
-    params: { slug: `${product.slug}` },
-  }));
-
-  return { paths, fallback: false };
+  const products = await res.json();
+  const paths = products.map((product) => {
+    return {
+      params: { slug: `${product.slug}` },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
