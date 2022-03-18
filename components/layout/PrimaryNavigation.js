@@ -10,7 +10,7 @@ export default function PrimaryNavigation({ open }) {
           : "hidden sm:block pt-6"
       }
       aria-label="Main menu">
-      <ul className="flex flex-col justify-between sm:justify-center h-1/3 sm:flex-row items-center text-center sm:text-left flex-wrap gap-5 max-w-7xl mx-auto">
+      <ul className="flex flex-col justify-between sm:justify-center mt-4 max-h-1/3 sm:flex-row items-center text-center sm:text-left sm:flex-wrap gap-5 max-w-7xl mx-auto">
         <li className="sm:ml-auto">
           <Link href="/shop">Shop</Link>
         </li>

@@ -19,7 +19,7 @@ function SelectField({ value, id, label, children, disabled, ...rest }) {
         name={id}
         disabled={disabled}
         {...rest}
-        className={`text-black border-none rounded-md block w-full pb-1 pt-[1.438rem] px-2 text-[16px] outline-none transition-all duration-100 ease-out ${
+        className={`text-black appearance-none border-none rounded-md block w-full pb-1 pt-[1.438rem] px-2 text-[16px] outline-none transition-all duration-100 ease-out ${
           disabled ? "cursor-not-allowed" : "cursor-default"
         }`}
         onFocus={inputFocus}

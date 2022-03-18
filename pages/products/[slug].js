@@ -50,7 +50,7 @@ function Product({ product, announcement, frames, sizes }) {
       </Head>
       <Announcement announcement={announcement} />
       <Layout className="max-w-screen-xl mx-auto sm:p-8">
-        <section className="flex flex-col sm:flex-row gap-6 px-3">
+        <section className="flex flex-col sm:flex-row gap-6 px-3 pb-8">
           <div className="sm:w-1/2 -mx-3 sm:mx-0">
             <Image
               src={product.image?.url}
@@ -155,13 +155,11 @@ function Product({ product, announcement, frames, sizes }) {
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full border border-productText rounded-sm p-1 text-black min-h-[80px]"></textarea>
               </div>
-              <div className="fixed bottom-0 right-0 left-0 shadow-[0_-4px_8px_#33333330] bg-white p-4 sm:static sm:shadow-none sm:p-0">
-                <button
-                  className="text-white bg-primaryColor font-medium py-3 w-full uppercase rounded"
-                  type="submit">
-                  tilføj til kurv
-                </button>
-              </div>
+              <button
+                className="text-white bg-primaryColor font-medium py-3 w-full uppercase rounded"
+                type="submit">
+                tilføj til kurv
+              </button>
               {statusMessage && <p className="text-red-500">*{statusMessage}*</p>}
             </form>
           </div>

@@ -42,16 +42,17 @@ function Profile({ announcement }) {
       <Layout>
         {status !== "authenticated" && <h1 className="text-2xl text-center my-40">Loading...</h1>}
         {session && (
-          <div className="sm:flex gap-8 my-10 max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-8 my-10 max-w-5xl mx-auto">
             <aside className="sm:max-w-[250px]">
               <div className="flex items-center mb-6 truncate">
-                <div className="w-12 h-12 rounded-full overflow-hidden"></div>
-                <Image
-                  src={session.user.image}
-                  height="48"
-                  width="48"
-                  alt={"profile pic of " + session.user.name}
-                />
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <Image
+                    src={session.user.image}
+                    height="48"
+                    width="48"
+                    alt={"profile pic of " + session.user.name}
+                  />
+                </div>
                 <div className="ml-2 truncate">
                   <h2 className="text-base text-black font-medium truncate capitalize">
                     {session.user.data.username}
@@ -59,7 +60,7 @@ function Profile({ announcement }) {
                   <p className="text-sm text-black truncate">{session.user.email}</p>
                 </div>
               </div>
-              <div>
+              <div className="border border-inputBorder rounded-md">
                 <Link
                   href={{
                     pathname: router.pathname,
