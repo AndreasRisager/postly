@@ -37,7 +37,7 @@ const InputField = ({ children, id, value, style, disabled, infoText, ...rest })
       {disabled && infoText && (
         <button
           type="button"
-          onFocus={() => setOpen(!open)}
+          onClick={() => setOpen(!open)}
           onBlur={() => setOpen(false)}
           className="absolute right-1 top-1.5">
           {open && (
