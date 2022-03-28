@@ -16,7 +16,7 @@ function Inspiration({ announcement }) {
 export async function getStaticProps() {
   const announcement = await getAnnouncement();
 
-  return { props: { announcement } };
+  return { props: { announcement }, revalidate: 60 };
 }
 
 export default Inspiration;

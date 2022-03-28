@@ -93,7 +93,7 @@ export async function getStaticProps() {
   const products = await getProducts();
   const categories = await getCategories();
 
-  return { props: { announcement, products, categories } };
+  return { props: { announcement, products, categories }, revalidate: 60 };
 }
 
 export default Shop;

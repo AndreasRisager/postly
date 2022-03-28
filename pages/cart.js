@@ -126,5 +126,5 @@ export default function Cart({ announcement }) {
 export async function getStaticProps() {
   const announcement = await getAnnouncement();
 
-  return { props: { announcement } };
+  return { props: { announcement }, revalidate: 60 };
 }
