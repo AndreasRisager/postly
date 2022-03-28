@@ -51,7 +51,11 @@ export default function Cart({ announcement }) {
                         {item.description}
                       </p>
                       <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap">
-                        Størrelse: {item.sizes.name}, Ramme: {item.frames.name}.
+                        {item.type === "plakat"
+                          ? `Størrelse: ${item.sizes.name}, Ramme: ${item.frames.name}.`
+                          : item.type === "kalender"
+                          ? `${item.calendarName && `Kalender navn: ${item.calendarName}`}`
+                          : ""}
                       </p>
                       {item.message && (
                         <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap break-all">

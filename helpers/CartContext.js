@@ -32,7 +32,10 @@ export function CartProvider({ children }) {
           item.frames.name === product.frames.name
             ? {
                 ...exist,
-                price: product.price + product.frames.price + product.sizes.price,
+                price:
+                  product.price +
+                  (product.frames ? product.frames.price : 0) +
+                  (product.sizes ? product.sizes.price : 0),
                 quantity: exist.quantity + 1,
               }
             : item
@@ -43,7 +46,10 @@ export function CartProvider({ children }) {
         ...prevCart,
         {
           ...product,
-          price: product.price + product.frames.price + product.sizes.price,
+          price:
+            product.price +
+            (product.frames ? product.frames.price : 0) +
+            (product.sizes ? product.sizes.price : 0),
           quantity: 1,
         },
       ]);

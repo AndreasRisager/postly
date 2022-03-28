@@ -17,7 +17,8 @@ export default function Orders() {
       });
       if (response.ok) {
         const data = await response.json();
-        setOrders(data.orders.reverse());
+        const paidOrders = data.orders.filter((order) => order.paid === true);
+        setOrders(paidOrders.reverse());
       }
     };
     getOrders();
@@ -28,9 +29,6 @@ export default function Orders() {
       <h1 className="text-2xl font-medium text-black mb-3">Mine Ordrer</h1>
       {orders.length === 0 && <p>Du har ikke nogle ordrer</p>}
       {orders?.map((order) => {
-        if (order.paid === false) {
-          return null;
-        }
         return (
           <div key={order.id} className={`shadow p-3 rounded-lg text-gray-500 mb-4`}>
             <div className="flex flex-wrap-reverse justify-between mb-3">
@@ -62,7 +60,7 @@ export default function Orders() {
               <p>
                 Beløb:{" "}
                 <span className="font-semibold text-black">
-                  {order.products.reduce((acc, curVal) => acc + curVal.price * curVal.quantity, 0)}
+                  {order.total}
                   &nbsp;kr
                 </span>
               </p>
@@ -87,11 +85,14 @@ export default function Orders() {
                     </h3>
                     <p>{product.description} </p>
                     <p>
-                      Størrelse: {product.sizes.name}, Ramme: {product.frames.name}
+                      {product.type === "plakat"
+                        ? `Størrelse: ${product.sizes.name}, Ramme: ${product.frames.name}.`
+                        : product.type === "kalender"
+                        ? `${product.calendarName && `Kalender navn: ${product.calendarName}`}`
+                        : ""}
                     </p>
                     <p>Besked: {product.message}</p>
                   </div>
-                  <div></div>
                 </div>
               );
             })}

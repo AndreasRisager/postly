@@ -156,8 +156,8 @@ export default function Payment({ state, prevStep, formatttedAddress, setStep, s
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/confirm`, {
           method: "POST",
           headers: {
-            Authorization: "Bearer " + session.jwt,
             "Content-Type": "application/json",
+            Authorization: "Bearer " + session.jwt,
           },
           body: JSON.stringify({ paymentIntent }),
         });

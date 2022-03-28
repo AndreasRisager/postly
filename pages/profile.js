@@ -43,17 +43,17 @@ function Profile({ announcement }) {
               <div className="flex items-center mb-6 truncate">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
-                    src={session.user.image}
+                    src={session.user?.image}
                     height="48"
                     width="48"
-                    alt={"profile pic of " + session.user.name}
+                    alt={"profile pic of " + session.user?.data?.username}
                   />
                 </div>
                 <div className="ml-2 truncate">
                   <h2 className="text-base text-black font-medium truncate capitalize">
-                    {session.user.data.username}
+                    {session.user?.data?.username}
                   </h2>
-                  <p className="text-sm text-black truncate">{session.user.email}</p>
+                  <p className="text-sm text-black truncate">{session.user?.email}</p>
                 </div>
               </div>
               <div className="border border-inputBorder rounded-md">
