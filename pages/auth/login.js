@@ -15,7 +15,7 @@ function Login({ providers }) {
   }, [status, from, router]);
 
   return (
-    <Layout>
+    <Layout title="Login">
       <div className="flex flex-col items-center my-40">
         {Object.values(providers).map((provider) => (
           <div key={provider.name}>

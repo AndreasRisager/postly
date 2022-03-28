@@ -38,13 +38,15 @@ export default function Newsletter() {
           type="email"
           name="newsletterForm"
           id="newsletterForm"
-          className={`w-full truncate bg-white py-3 pl-5 pr-1 rounded-sm border border-inputBorder sm:min-w-[185px] max-w-sm min-h-[46px]`}
-          placeholder="E-mailadresse"
+          className={`w-full text-[16px] truncate bg-white py-3 pl-5 pr-1 rounded-sm border border-inputBorder sm:min-w-[185px] max-w-sm min-h-[46px]`}
+          disabled={!session}
+          placeholder={session ? "E-mailadresse" : "Du skal logge ind for at tilmelde dig"}
           defaultValue={session?.user.data.email}
         />
         <button
           type="submit"
-          className={`bg-primaryColor uppercase py-3 px-5 rounded-sm text-sm font-semibold min-h-[46px] w-max`}>
+          disabled={!session}
+          className={`bg-primaryColor uppercase py-3 px-5 rounded-sm text-sm font-semibold min-h-[46px] w-max disabled:cursor-not-allowed`}>
           {subscribed ? "Tilmeldt" : "Tilmeld"}
           {subscribed ? <CheckIcon className="w-5 h-5 inline align-top -mr-1.5" /> : ""}
         </button>

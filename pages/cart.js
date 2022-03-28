@@ -4,18 +4,14 @@ import Layout from "../components/layout/Layout";
 import Image from "next/image";
 import { getAnnouncement } from "../lib/getAnnouncement";
 import Announcement from "../components/layout/Announcement";
-import Head from "next/head";
 
 export default function Cart({ announcement }) {
   const { cart, isCartEmpty, removeFromCart, totalPrice, updateItemQuantity } = useCart();
 
   return (
     <>
-      <Head>
-        <title>Din indkøbskurv - Postly</title>
-      </Head>
       <Announcement announcement={announcement} />
-      <Layout>
+      <Layout title="Din indkøbskurv">
         {isCartEmpty ? (
           <div className="text-center my-40">
             <h1 className="text-2xl mb-4">Din indkøbskurv er tom!</h1>
@@ -76,11 +72,11 @@ export default function Cart({ announcement }) {
                   </div>
                   <div className="text-center px-2">
                     <p className="mb-3 md:hidden">Antal</p>
-                    <label htmlFor="quantity" className="screenreader">
+                    <label htmlFor="quantity" className="sr-only">
                       Antal
                     </label>
                     <input
-                      className="text-center w-11 p-0 md:w-14 md:py-2 md:px-1 border border-inputBorder bg-white text-black max-w-full rounded-sm text-base"
+                      className="text-center text-[16px] w-11 p-0 md:w-14 md:py-2 md:px-1 border border-inputBorder bg-white text-black max-w-full rounded-sm text-base"
                       id="quantity"
                       type="number"
                       defaultValue={item.quantity}

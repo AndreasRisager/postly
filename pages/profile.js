@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Announcement from "../components/layout/Announcement";
 import { getAnnouncement } from "../lib/getAnnouncement";
-import Head from "next/head";
 import Image from "next/image";
 
 function Profile({ announcement }) {
@@ -35,11 +34,8 @@ function Profile({ announcement }) {
 
   return (
     <>
-      <Head>
-        <title>Profil - Postly</title>
-      </Head>
       <Announcement announcement={announcement} />
-      <Layout>
+      <Layout title="Profil">
         {status !== "authenticated" && <h1 className="text-2xl text-center my-40">Loading...</h1>}
         {session && (
           <div className="flex flex-col sm:flex-row gap-8 my-10 max-w-5xl mx-auto">

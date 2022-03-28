@@ -26,7 +26,7 @@ export default function CookieConsent() {
           Denne hjemmeside bruger cookies for at sikre, at du får den bedste oplevelse på vores
           hjemmeside.{" "}
           <Link href="/policies/privacy-policy">
-            <a className="whitespace-nowrap border-b border-black">Learn more</a>
+            <a className="whitespace-nowrap border-b border-black">Læs mere</a>
           </Link>
         </p>
       </div>

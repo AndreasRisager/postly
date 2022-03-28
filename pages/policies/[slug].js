@@ -17,7 +17,7 @@ export default function Policy({ announcement, policy }) {
   return (
     <>
       <Announcement announcement={announcement} />
-      <Layout className="max-w-3xl mx-auto px-4">
+      <Layout className="max-w-3xl mx-auto px-4" title={policy.title}>
         <h1 className="text-center text-2xl pt-12 pb-10 uppercase tracking-widest">
           {policy.title}
         </h1>

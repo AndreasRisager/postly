@@ -84,13 +84,15 @@ export default function SiteFooter() {
               type="email"
               name="footerNewsletter"
               id="footerNewsletter"
-              placeholder="E-mailadresse"
+              disabled={!session}
+              placeholder={session ? "E-mailadresse" : "Du skal logge ind for at tilmelde dig"}
               defaultValue={session?.user.data.email}
-              className="w-full bg-white py-3 pl-5 pr-1 truncate rounded-sm border border-inputBorder sm:min-w-[185px] max-w-sm min-h-[46px]"
+              className="w-full text-[16px] bg-white py-3 pl-5 pr-1 truncate rounded-sm border border-inputBorder sm:min-w-[185px] max-w-sm min-h-[46px]"
             />
             <button
               type="submit"
-              className={`bg-primaryColor uppercase py-3 px-5 rounded-sm text-sm font-semibold mt-1 min-h-[46px] w-max`}>
+              disabled={!session}
+              className={`bg-primaryColor uppercase py-3 px-5 rounded-sm text-sm font-semibold mt-1 min-h-[46px] w-max disabled:cursor-not-allowed`}>
               {subscribed ? "Tilmeldt" : "Tilmeld"}
               {subscribed ? <CheckIcon className="w-5 h-5 inline align-top -mr-1.5" /> : ""}
             </button>

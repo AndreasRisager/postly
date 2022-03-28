@@ -1,6 +1,5 @@
 import { ViewGridIcon } from "@heroicons/react/solid";
 import { ViewListIcon } from "@heroicons/react/outline";
-import Head from "next/head";
 import { useState } from "react";
 import Announcement from "../components/layout/Announcement";
 import Layout from "../components/layout/Layout";
@@ -20,11 +19,8 @@ function Shop({ announcement, products, categories }) {
 
   return (
     <>
-      <Head>
-        <title>Shop - Postly</title>
-      </Head>
       <Announcement announcement={announcement} />
-      <Layout className="max-w-screen-xl mx-auto flex flex-col sm:flex-row gap-6 p-8">
+      <Layout className="max-w-screen-xl mx-auto flex flex-col sm:flex-row gap-6 p-8" title="Shop">
         <button
           className={`flex items-center max-w-max px-1 gap-2.5 sm:hidden border border-black rounded-md ${
             openFilterMenu ? "text-white bg-black" : "text-black"

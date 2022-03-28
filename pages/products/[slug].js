@@ -4,7 +4,6 @@ import Layout from "../../components/layout/Layout";
 import { useCart } from "../../helpers/CartContext";
 import Announcement from "../../components/layout/Announcement";
 import Image from "next/image";
-import Head from "next/head";
 import { getProductBySlug } from "../../lib/getProductBySlug";
 import { getProductVariations } from "../../lib/getProductVariations";
 import { getProducts } from "../../lib/getProducts";
@@ -30,26 +29,12 @@ function Product({ product, announcement, frames, sizes }) {
 
   return (
     <>
-      <Head>
-        <title>{`'${product.title}' Plakat - Postly`}</title>
-        <meta name="description" content={product.description} />
-        <link rel="canonical" href={`https://postly.netlify.app/${product.slug}`} />
-
-        <meta property="og:url" content={`https://postly.netlify.app/${product.slug}`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={`'${product.title}' Plakat - Postly`} />
-        <meta property="og:description" content={product.description} />
-        <meta property="og:image" content={product.image.url} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="postly.netlify.app" />
-        <meta property="twitter:url" content={`https://postly.netlify.app/${product.slug}`} />
-        <meta name="twitter:title" content={`'${product.title}' Plakat - Postly`} />
-        <meta name="twitter:description" content={product.description} />
-        <meta name="twitter:image" content={product.image.url} />
-      </Head>
       <Announcement announcement={announcement} />
-      <Layout className="max-w-screen-xl mx-auto sm:p-8">
+      <Layout
+        className="max-w-screen-xl mx-auto sm:p-8"
+        title={`'${product.title}' Plakat`}
+        description={product.description}
+        image={product?.image?.url}>
         <section className="flex flex-col sm:flex-row gap-6 px-3 pb-8">
           <div className="sm:w-1/2 -mx-3 sm:mx-0">
             <Image
@@ -153,7 +138,7 @@ function Product({ product, announcement, frames, sizes }) {
                 <textarea
                   id="message"
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full border border-productText rounded-sm p-1 text-black min-h-[80px]"></textarea>
+                  className="w-full border border-productText rounded-sm p-1 text-black text-[16px] min-h-[80px]"></textarea>
               </div>
               <button
                 className="text-white bg-primaryColor font-medium py-3 w-full uppercase rounded"
