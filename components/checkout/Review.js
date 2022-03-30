@@ -1,4 +1,8 @@
-export default function Review({ state, formatttedAddress, delivery, setStep }) {
+export default function Review({ state, delivery, setStep }) {
+  const formatttedAddress = `${state.address1 && state.address1 + ","} ${
+    state.address2 && state.address2 + ", "
+  }${state.zip && state.zip} ${state.city && state.city}`;
+
   return (
     <div className="border border-inputBorder rounded-md mb-8 text-md">
       <div className="flex border-b border-inputBorder justify-between p-4">

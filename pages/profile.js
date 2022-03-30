@@ -1,7 +1,6 @@
 import { useSession } from "next-auth/react";
 import Layout from "../components/layout/Layout";
 import { ChevronRightIcon } from "@heroicons/react/solid";
-import { useEffect } from "react";
 import Orders from "../components/profile/Orders";
 import Address from "../components/profile/Address";
 import Account from "../components/profile/Account";
@@ -12,15 +11,14 @@ import { getAnnouncement } from "../lib/getAnnouncement";
 import Image from "next/image";
 
 function Profile({ announcement }) {
-  const { data: session, status } = useSession();
   const router = useRouter();
-  const { page } = router.query;
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
       router.push(`/auth/login?from=${router.asPath}`);
-    }
-  }, [status, router]);
+    },
+  });
+  const { page } = router.query;
 
   const user = session?.user?.data;
 

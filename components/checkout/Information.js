@@ -68,7 +68,17 @@ export default function Information({ handleChange, state, nextStep, session }) 
 
     let updateData = {};
 
-    if (saveInformation) {
+    if (
+      (saveInformation && state.country !== session.user.data.country) ||
+      state.firstname !== session.user.data.firstname ||
+      state.lastname !== session.user.data.lastname ||
+      state.address1 !== session.user.data.address1 ||
+      state.address2 !== session.user.data.address2 ||
+      state.zip !== session.user.data.zip ||
+      state.city !== session.user.data.city ||
+      state.city !== session.user.data.city ||
+      state.phone !== session.user.data.phone
+    ) {
       updateData = {
         ...updateData,
         country: state.country,
@@ -80,7 +90,9 @@ export default function Information({ handleChange, state, nextStep, session }) 
         city: state.city,
         phone: state.phone,
       };
-    } else {
+    }
+
+    if (!saveInformation) {
       updateData = {
         ...updateData,
         country: "",
@@ -94,15 +106,6 @@ export default function Information({ handleChange, state, nextStep, session }) 
       };
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + session.jwt,
-      },
-      body: JSON.stringify(updateData),
-    });
-
     if (acceptNewsletter) {
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscribers`, {
         method: "POST",
@@ -113,10 +116,21 @@ export default function Information({ handleChange, state, nextStep, session }) 
       });
     }
 
-    if (!response.ok) {
-      const data = await response.json();
-      setStatusMessage(data?.message);
-      return;
+    if (saveInformation && Object.keys(updateData).length > 0) {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + session.jwt,
+        },
+        body: JSON.stringify(updateData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        setStatusMessage(data?.message);
+        return;
+      }
     }
 
     nextStep();
