@@ -18,7 +18,7 @@ export default function SiteHeader() {
         <nav className="flex gap-1 items-center justify-between max-w-7xl w-full mx-auto sm:grid sm:grid-cols-3">
           <Link href="/">
             <a className="text-xl sm:text-4xl font-medium text-center col-start-2">
-              <div className="h-14 w-20 sm:w-auto mx-auto relative">
+              <div className="h-14 w-28 sm:w-auto mx-auto relative">
                 <Image
                   src="https://res.cloudinary.com/dffpafuyg/image/upload/v1650574451/logo_postly_aflangt_bed1c4331c.png"
                   alt="postly logo"
@@ -37,11 +37,11 @@ export default function SiteHeader() {
             <Link href="/profile">
               <a>
                 {session ? (
-                  <div className="h-6 w-6 rounded-full overflow-hidden border-2 border-[#000]">
+                  <div className="h-7 w-7 rounded-full overflow-hidden border-2 border-[#000]">
                     <Image
                       src={session.user.image}
-                      height="20"
-                      width="20"
+                      height="28"
+                      width="28"
                       alt={"profile pic of " + session.user.name}
                     />
                   </div>
