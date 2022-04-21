@@ -98,10 +98,12 @@ export default function Shipping({
       </div>
       <p className="text-red-700 italic my-2 h-6">{statusMessage}</p>
       <div className="flex flex-wrap gap-y-4 items-center justify-between">
-        <button className="text-checkoutActiveColor" type="button" onClick={prevStep}>
+        <button className="text-checkoutActiveColor font-normal" type="button" onClick={prevStep}>
           Tilbage til oplysninger
         </button>
-        <button className="bg-checkoutActiveColor text-black p-3.5 rounded-md" type="submit">
+        <button
+          className="bg-checkoutActiveColor text-black p-3.5 rounded-md font-normal"
+          type="submit">
           Fortsæt til betaling
         </button>
       </div>

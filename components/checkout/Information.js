@@ -209,9 +209,11 @@ export default function Information({ handleChange, state, nextStep, session }) 
       <p className="text-red-700 italic my-2 h-5">{statusMessage}</p>
       <div className="flex flex-wrap gap-y-4 items-center justify-between">
         <Link href="/cart">
-          <a className="text-checkoutActiveColor">Tilbage til indkøbskurven</a>
+          <a className="text-checkoutActiveColor font-normal">Tilbage til indkøbskurven</a>
         </Link>
-        <button type="submit" className="bg-checkoutActiveColor text-black p-3.5 rounded-md">
+        <button
+          type="submit"
+          className="bg-checkoutActiveColor text-black p-3.5 rounded-md font-normal">
           Fortsæt til levering
         </button>
       </div>

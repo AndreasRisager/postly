@@ -17,7 +17,17 @@ export default function SiteHeader() {
       <header className="flex flex-col py-6 px-5 sm:px-8 border-b border-b-grey relative">
         <nav className="flex gap-1 items-center justify-between max-w-7xl w-full mx-auto sm:grid sm:grid-cols-3">
           <Link href="/">
-            <a className="text-xl sm:text-4xl font-medium col-start-2 text-center">POSTLY.DK</a>
+            <a className="text-xl sm:text-4xl font-medium text-center col-start-2">
+              <div className="h-14 w-20 sm:w-auto mx-auto relative">
+                <Image
+                  src="https://res.cloudinary.com/dffpafuyg/image/upload/v1650574451/logo_postly_aflangt_bed1c4331c.png"
+                  alt="postly logo"
+                  layout="fill"
+                  objectFit="contain"
+                  priority
+                />
+              </div>
+            </a>
           </Link>
           <div className="flex justify-end items-center gap-3">
             <button aria-label="open search">
@@ -25,14 +35,16 @@ export default function SiteHeader() {
             </button>
 
             <Link href="/profile">
-              <a className="h-6 w-6 rounded-full overflow-hidden">
+              <a>
                 {session ? (
-                  <Image
-                    src={session.user.image}
-                    height="24"
-                    width="24"
-                    alt={"profile pic of " + session.user.name}
-                  />
+                  <figure className="h-6 w-6 rounded-full overflow-hidden outline outline-offset-1 outline-2 outline-[#000]">
+                    <Image
+                      src={session.user.image}
+                      height="24"
+                      width="24"
+                      alt={"profile pic of " + session.user.name}
+                    />
+                  </figure>
                 ) : (
                   <UserIcon className="h-6 w-6 cursor-pointer" />
                 )}
@@ -55,7 +67,7 @@ export default function SiteHeader() {
             </button>
           </div>
         </nav>
-        <PrimaryNavigation open={openMenu} />
+        <PrimaryNavigation open={openMenu} setOpenMenu={setOpenMenu} />
       </header>
     </>
   );

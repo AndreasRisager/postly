@@ -32,30 +32,39 @@ export default function SiteFooter() {
           <p className="mb-5">
             Postly.dk
             <br />
-            Adresse
+            Strandholms Alle 43B
             <br />
             2650 Hvidovre
           </p>
-          <p className="mb-5">CVR. nr. 12345678</p>
+          <p className="mb-5">CVR. nr. 39744961</p>
           <p className="uppercase">Presse </p>
           <a
-            href="mailto:kontakt@postly.dk"
+            href="mailto:postlydk@gmail.com"
             className="underline"
-            title="mailto:kontakt@postly.dk"
+            title="kontakt os via e-mail"
             aria-describedby="a11y-external-message">
-            kontakt@postly.dk
+            postlydk@gmail.com
+          </a>
+          <a
+            href="tel:+4542191325"
+            className="underline"
+            title="kontakt os via telefon"
+            aria-describedby="a11y-external-message">
+            tlf: 42191325
           </a>
         </div>
         <div className="flex-1 basis-full sm:basis-1/2 lg:basis-1/4 flex flex-col py-4 pr-4">
-          <h3 className="text-base font-semibold mb-6 uppercase">Kundeservice</h3>
+          <h3 className="text-base font-semibold mb-6 uppercase" id="kundeservice">
+            Kundeservice
+          </h3>
           <p className="mb-5">
             Kontakt mig gerne på <br />
             <a
-              href="mailto:kontakt@postly.dk"
+              href="mailto:postlydk@gmail.com"
               className="underline"
-              title="mailto:kontakt@postly.dk"
+              title="kontakt os via e-mail"
               aria-describedby="a11y-external-message">
-              kontakt@postly.dk
+              postlydk@gmail.com
             </a>
           </p>
           <p className="mb-5">Jeg besvarer din mail indenfor 24 timer, mandag til fredag.</p>
@@ -64,10 +73,12 @@ export default function SiteFooter() {
           <h3 className="text-base font-semibold mb-6 uppercase">Yderligere service</h3>
           <p className="uppercase">Betingelser</p>
           <Link href="/policies/terms-of-service">
-            <a className="underline">Handelsbetingelser</a>
+            <a className="underline" title="Handelsbetingelser">
+              Handelsbetingelser
+            </a>
           </Link>
           <Link href="/policies/privacy-policy">
-            <a className="underline">
+            <a className="underline" title="Privatlivspolitik/Cookies">
               Privatlivspolitik/
               <br />
               Cookies
@@ -84,14 +95,12 @@ export default function SiteFooter() {
               type="email"
               name="footerNewsletter"
               id="footerNewsletter"
-              disabled={!session}
-              placeholder={session ? "E-mailadresse" : "Du skal logge ind for at tilmelde dig"}
-              defaultValue={session?.user.data.email}
+              placeholder={"E-mailadresse"}
+              defaultValue={session?.user?.data?.email || ""}
               className="w-full text-[16px] bg-white py-3 pl-5 pr-1 truncate rounded-sm border border-inputBorder sm:min-w-[185px] max-w-sm min-h-[46px]"
             />
             <button
               type="submit"
-              disabled={!session}
               className={`bg-primaryColor uppercase py-3 px-5 rounded-sm text-sm font-semibold mt-1 min-h-[46px] w-max disabled:cursor-not-allowed`}>
               {subscribed ? "Tilmeldt" : "Tilmeld"}
               {subscribed ? <CheckIcon className="w-5 h-5 inline align-top -mr-1.5" /> : ""}
@@ -102,18 +111,20 @@ export default function SiteFooter() {
       <div className="max-w-7xl mx-auto p-8">
         <ul className="flex py-4">
           <li className="pr-4">
-            <Link href="/">
-              <a>
-                <FaFacebookSquare className="text-2xl" />
-              </a>
-            </Link>
+            <a
+              href="https://www.facebook.com/Postlydk-106941115181644/"
+              target="_blank"
+              title="Besøg vores facebook">
+              <FaFacebookSquare className="text-2xl" />
+            </a>
           </li>
           <li className="pr-4">
-            <Link href="/">
-              <a>
-                <FaInstagram className="text-2xl" />
-              </a>
-            </Link>
+            <a
+              href="https://www.instagram.com/postly.dk/"
+              target="_blank"
+              title="Besøg vores instagram">
+              <FaInstagram className="text-2xl" />
+            </a>
           </li>
         </ul>
         <p className="mb-5">&copy; 2022, Postly.dk</p>

@@ -23,9 +23,9 @@ export default function SEO({ title, description, keywords, image }) {
       />
       <meta name="theme-color" content="#FFFFFF" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="canonical" href={`https://postly.netlify.app${router.pathname}`} />
+      <link rel="canonical" href={`https://postly.dk${router.pathname}`} />
 
-      <meta property="og:url" content={`https://postly.netlify.app${router.pathname}`} />
+      <meta property="og:url" content={`https://postly.dk${router.pathname}`} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title ? `${title} - Postly` : "Postly"} />
       <meta
@@ -44,8 +44,8 @@ export default function SEO({ title, description, keywords, image }) {
       />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="https://postly.netlify.app/" />
-      <meta property="twitter:url" content={`https://postly.netlify.app${router.pathname}`} />
+      <meta property="twitter:domain" content="https://postly.dk/" />
+      <meta property="twitter:url" content={`https://postly.dk${router.pathname}`} />
       <meta name="twitter:title" content={title ? `${title} - Postly` : "Postly"} />
       <meta
         name="twitter:description"

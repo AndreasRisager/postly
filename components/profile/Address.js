@@ -97,7 +97,8 @@ export default function Address() {
 
   return (
     <>
-      <h1 className="text-2xl font-medium text-black mb-3">Leveringsadresse</h1>
+      <h1 className="text-2xl font-medium text-black">Leveringsadresse</h1>
+      <h2 className="mb-3">Gem din leveringsadresse for hurtigere betaling</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
         <SelectField
           name="country"

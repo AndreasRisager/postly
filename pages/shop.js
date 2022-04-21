@@ -12,7 +12,7 @@ import { getCategories } from "../lib/getCategories";
 
 function Shop({ announcement, products, categories }) {
   const [filtered, setFiltered] = useState([]);
-  const [listView, setListView] = useState(false);
+  // const [listView, setListView] = useState(false);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [priceLimit, setPriceLimit] = useState(undefined);
   const [category, setCategory] = useState(undefined);
@@ -40,7 +40,7 @@ function Shop({ announcement, products, categories }) {
         />
         <div className="flex-1">
           <section className="flex flex-col sm:flex-row sm:items-center gap-3 sm:whitespace-nowrap">
-            <div className="flex gap-1">
+            {/* <div className="flex gap-1">
               <button
                 className={
                   listView
@@ -61,10 +61,10 @@ function Shop({ announcement, products, categories }) {
                 aria-label="change to product list view">
                 <ViewListIcon className="h-[18px] w-[18px] m-0.5" />
               </button>
-            </div>
-            <p>{filtered?.length} Produkter</p>
+            </div> */}
+            <p className="text-black">{filtered?.length} Produkter</p>
             <div className="flex-1 border-b border-grey" />
-            <form>
+            {/* <form>
               <label htmlFor="sort">Sorter efter</label>
               <select name="sort" id="sort" className="capitalize">
                 <option value="price-lowest">Pris (laveste)</option>
@@ -72,13 +72,13 @@ function Shop({ announcement, products, categories }) {
                 <option value="name-a">Navn (a-å)</option>
                 <option value="name-å">Navn (å-a)</option>
               </select>
-            </form>
+            </form> */}
           </section>
           <section className="mt-8">
             {filtered?.length === 0 && <h4>Beklager, ingen produkter matchede din søgning.</h4>}
-            <div className="grid gap-1 grid-cols-2 md:grid-cols-shop items-end">
+            <div className="grid gap-x-2 gap-y-5 grid-cols-2 md:grid-cols-shop items-end">
               {filtered?.map((product) => (
-                <Product product={product} key={product.id} listView={listView} />
+                <Product product={product} key={product.id} />
               ))}
             </div>
           </section>

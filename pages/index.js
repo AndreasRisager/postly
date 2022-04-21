@@ -18,7 +18,7 @@ function Home({ announcement, slides, products }) {
             <h2 className="text-lg">Anbefalet til dig</h2>
             <Link href="/shop">Se mere</Link>
           </div>
-          <div className="grid gap-1 items-end grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 ">
+          <div className="grid gap-x-2 gap-y-5 items-end grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 ">
             {products.slice(0, 8).map((product) => (
               <Product product={product} key={product.id} />
             ))}

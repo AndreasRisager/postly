@@ -314,11 +314,11 @@ export default function Payment({ state, prevStep, formatttedAddress, setStep, s
 
       <p className="text-red-700 italic my-2 min-h-6">{statusMessage}</p>
       <div className="flex flex-wrap gap-y-4 items-center justify-between">
-        <button className="text-checkoutActiveColor" type="button" onClick={prevStep}>
+        <button className="text-checkoutActiveColor font-normal" type="button" onClick={prevStep}>
           Tilbage til levering
         </button>
         <button
-          className="bg-checkoutActiveColor text-black p-3.5 rounded-md disabled:bg-gray-300 disabled:cursor-not-allowed"
+          className="bg-checkoutActiveColor text-black p-3.5 rounded-md font-normal disabled:bg-gray-300 disabled:cursor-not-allowed"
           type="submit"
           disabled={isProcessing || isCartEmpty || !stripe}>
           {isProcessing ? (

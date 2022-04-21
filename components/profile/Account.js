@@ -76,8 +76,7 @@ export default function Account() {
       <h1 className="text-2xl font-medium text-black mb-3">Konto</h1>
       {session && (
         <div className="flex flex-col">
-          <p>Medlem siden: {createdAt}</p>
-          <p>Konto ID: {session.user.data.id}</p>
+          <p className="mb-2">Medlem siden: {createdAt}</p>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <InputField

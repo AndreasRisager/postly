@@ -77,13 +77,6 @@ export default function FilterShop({
           </button>
           <button
             className={`capitalize py-1 my-0.5 text-left leading-5 text-filterButton border-b md:text-md ${
-              priceLimit === 200 ? "border-filterButton" : "border-transparent"
-            }`}
-            onClick={() => setPriceLimit(200)}>
-            under 200 kr
-          </button>
-          <button
-            className={`capitalize py-1 my-0.5 text-left leading-5 text-filterButton border-b md:text-md ${
               priceLimit === 300 ? "border-filterButton" : "border-transparent"
             }`}
             onClick={() => setPriceLimit(300)}>
@@ -91,17 +84,17 @@ export default function FilterShop({
           </button>
           <button
             className={`capitalize py-1 my-0.5 text-left leading-5 text-filterButton border-b md:text-md ${
-              priceLimit === 400 ? "border-filterButton" : "border-transparent"
-            }`}
-            onClick={() => setPriceLimit(400)}>
-            under 400 kr
-          </button>
-          <button
-            className={`capitalize py-1 my-0.5 text-left leading-5 text-filterButton border-b md:text-md ${
               priceLimit === 500 ? "border-filterButton" : "border-transparent"
             }`}
             onClick={() => setPriceLimit(500)}>
             under 500 kr
+          </button>
+          <button
+            className={`capitalize py-1 my-0.5 text-left leading-5 text-filterButton border-b md:text-md ${
+              priceLimit === 1000 ? "border-filterButton" : "border-transparent"
+            }`}
+            onClick={() => setPriceLimit(1000)}>
+            under 1000 kr
           </button>
         </div>
         <button

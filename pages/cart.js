@@ -24,7 +24,7 @@ export default function Cart({ announcement }) {
             <h1 className="text-2xl my-8 lg:text-center">Din indkøbskurv</h1>
             <section className="text-textColor">
               <header className="hidden md:grid md:grid-cols-cart border-b border-grey py-6">
-                <p className="px-2">Product</p>
+                <p className="px-2">Produkt</p>
                 <p className="px-2">Pris</p>
                 <p className="px-2 text-center">Antal</p>
                 <p className="px-2 text-right">I alt</p>
@@ -43,7 +43,7 @@ export default function Cart({ announcement }) {
                     />
                     <div className="md:mr-4">
                       <h3 className="text-lg font-normal text-black mb-1">
-                        <Link href={`/product/${item.slug}`}>
+                        <Link href={`/products/${item.slug}`}>
                           <a className="inline-block hover:underline">{item.title}</a>
                         </Link>
                       </h3>
@@ -51,17 +51,26 @@ export default function Cart({ announcement }) {
                         {item.description}
                       </p>
                       <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap">
-                        {item.type === "plakat"
-                          ? `Størrelse: ${item.sizes.name}, Ramme: ${item.frames.name}.`
-                          : item.type === "kalender"
-                          ? `${item.calendarName && `Kalender navn: ${item.calendarName}`}`
-                          : ""}
+                        {Object.keys(item.productVariant).map((variant, i) => {
+                          if (typeof item.productVariant[variant] !== "string") {
+                            return (
+                              <span key={variant + i}>
+                                {`${item.productVariant[variant].title || variant}: ${
+                                  item.productVariant[variant].name
+                                }${Object.keys(item.productVariant).length === i + 1 ? "" : ", "}`}
+                              </span>
+                            );
+                          } else {
+                            return (
+                              <span key={variant + i}>
+                                {`${variant}: ${item.productVariant[variant]}${
+                                  Object.keys(item.productVariant).length === i + 1 ? "" : ", "
+                                }`}
+                              </span>
+                            );
+                          }
+                        })}
                       </p>
-                      {item.message && (
-                        <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap break-all">
-                          Besked: {item.message}
-                        </p>
-                      )}
                       <button
                         className="text-textColor border border-textColor py-1 px-2 uppercase font-semibold text-xs rounded-sm hover:bg-textColor hover:text-white"
                         onClick={() => removeFromCart(item)}

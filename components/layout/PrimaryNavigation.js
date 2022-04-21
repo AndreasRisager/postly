@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 
-export default function PrimaryNavigation({ open }) {
+export default function PrimaryNavigation({ open, setOpenMenu }) {
   return (
     <nav
       className={
@@ -20,23 +20,25 @@ export default function PrimaryNavigation({ open }) {
         <li>
           <Link href="/products/gift-card">Gavekort</Link>
         </li>
-        <li>
+        <li onClick={() => setOpenMenu(false)}>
           <Link href="/#newsletter">Nyhedsbrev</Link>
         </li>
-        <li className="sm:mr-auto">
-          <Link href="/">Kundeservice</Link>
+        <li className="sm:mr-auto" onClick={() => setOpenMenu(false)}>
+          <Link href="#kundeservice">Kundeservice</Link>
         </li>
         <li className="flex gap-5">
-          <Link href="/">
-            <a>
-              <FaFacebookSquare className="text-xl" />
-            </a>
-          </Link>
-          <Link href="/">
-            <a>
-              <FaInstagram className="text-xl" />
-            </a>
-          </Link>
+          <a
+            href="https://www.facebook.com/Postlydk-106941115181644/"
+            target="_blank"
+            title="Besøg vores facebook">
+            <FaFacebookSquare className="text-xl" />
+          </a>
+          <a
+            href="https://www.instagram.com/postly.dk/"
+            target="_blank"
+            title="Besøg vores instagram">
+            <FaInstagram className="text-xl" />
+          </a>
         </li>
       </ul>
     </nav>

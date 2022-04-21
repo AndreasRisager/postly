@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       colors: {
         grey: "#dee2e6",
-        primaryColor: "#98c4be",
+        primaryColor: "#c5b4ad",
         black: "#333",
         productText: "#6e6e6e",
         footerColor: "#f2f0f0",
