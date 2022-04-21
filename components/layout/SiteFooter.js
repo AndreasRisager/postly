@@ -114,6 +114,7 @@ export default function SiteFooter() {
             <a
               href="https://www.facebook.com/Postlydk-106941115181644/"
               target="_blank"
+              rel="noreferrer"
               title="Besøg vores facebook">
               <FaFacebookSquare className="text-2xl" />
             </a>
@@ -122,6 +123,7 @@ export default function SiteFooter() {
             <a
               href="https://www.instagram.com/postly.dk/"
               target="_blank"
+              rel="noreferrer"
               title="Besøg vores instagram">
               <FaInstagram className="text-2xl" />
             </a>
