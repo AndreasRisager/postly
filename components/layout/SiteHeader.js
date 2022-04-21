@@ -37,14 +37,14 @@ export default function SiteHeader() {
             <Link href="/profile">
               <a>
                 {session ? (
-                  <figure className="h-6 w-6 rounded-full overflow-hidden outline outline-offset-1 outline-2 outline-[#000]">
+                  <div className="h-6 w-6 rounded-full overflow-hidden border-2 border-[#000]">
                     <Image
                       src={session.user.image}
-                      height="24"
-                      width="24"
+                      height="20"
+                      width="20"
                       alt={"profile pic of " + session.user.name}
                     />
-                  </figure>
+                  </div>
                 ) : (
                   <UserIcon className="h-6 w-6 cursor-pointer" />
                 )}
