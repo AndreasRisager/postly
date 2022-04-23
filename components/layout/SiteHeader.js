@@ -36,7 +36,7 @@ export default function SiteHeader() {
 
             <Link href="/profile">
               <a>
-                {session ? (
+                {session?.user?.image ? (
                   <div className="h-7 w-7 rounded-full overflow-hidden border-2 border-[#000]">
                     <Image
                       src={session.user.image}

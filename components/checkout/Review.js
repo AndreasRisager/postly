@@ -1,5 +1,5 @@
 export default function Review({ state, delivery, setStep }) {
-  const formatttedAddress = `${state.address1 && state.address1 + ","} ${
+  const formattedAddress = `${state.address1 && state.address1 + ","} ${
     state.address2 && state.address2 + ", "
   }${state.zip && state.zip} ${state.city && state.city}`;
 
@@ -17,7 +17,7 @@ export default function Review({ state, delivery, setStep }) {
       </div>
       <div className="flex border-b border-inputBorder justify-between p-4 last-of-type:border-none">
         <p className="flex-[0_1_5em] text-checkoutTextColor">Send til</p>
-        <p className="text-black flex-[1_1] px-4">{formatttedAddress.trim()}</p>
+        <p className="text-black flex-[1_1] px-4">{formattedAddress.trim()}</p>
         <button
           className="cursor-pointer text-checkoutActiveColor text-sm"
           type="button"

@@ -3,14 +3,7 @@ import Review from "./Review";
 import xml2js from "xml2js";
 import RadioField from "../layout/RadioField";
 
-export default function Shipping({
-  nextStep,
-  prevStep,
-  state,
-  setState,
-  setStep,
-  formatttedAddress,
-}) {
+export default function Shipping({ nextStep, prevStep, state, setState, setStep }) {
   const [statusMessage, setStatusMessage] = useState("");
   const [shipping, setShipping] = useState([]);
 
@@ -54,9 +47,13 @@ export default function Shipping({
     nextStep();
   };
 
+  const formattedAddress = `${state.address1 && state.address1 + ","} ${
+    state.address2 && state.address2 + ", "
+  }${state.zip && state.zip} ${state.city && state.city}`;
+
   return (
     <form onSubmit={handleSubmit}>
-      <Review state={state} setStep={setStep} formatttedAddress={formatttedAddress} />
+      <Review state={state} setStep={setStep} />
       <h2 className="text-xl font-medium text-black mt-7 mb-4">Leveringsmetode</h2>
       <div className="mb-4">
         {shipping.map((shop) => {
@@ -83,7 +80,7 @@ export default function Shipping({
         <RadioField
           name="delivery_method"
           id="home_delivery"
-          value={formatttedAddress}
+          value={formattedAddress}
           onChange={(e) =>
             setState((prev) => ({
               ...prev,
@@ -91,7 +88,7 @@ export default function Shipping({
               delivery_price: 45.0,
             }))
           }
-          defaultChecked={state.delivery_method === formatttedAddress}>
+          defaultChecked={state.delivery_method === formattedAddress}>
           <div>GLS Hjemmelevering</div>
           <div>45.00&nbsp;kr.</div>
         </RadioField>

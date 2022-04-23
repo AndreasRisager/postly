@@ -8,7 +8,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import { CgSpinner } from "react-icons/cg";
 
-export default function Payment({ state, prevStep, formatttedAddress, setStep, session }) {
+export default function Payment({ state, prevStep, setStep, session }) {
   const { cart, resetCart, isCartEmpty } = useCart();
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -182,7 +182,7 @@ export default function Payment({ state, prevStep, formatttedAddress, setStep, s
 
   return (
     <form onSubmit={handleSubmit}>
-      <Review state={state} setStep={setStep} delivery formatttedAddress={formatttedAddress} />
+      <Review state={state} setStep={setStep} delivery />
       <h2 className="text-xl font-medium text-black mt-7">Betaling</h2>
       <h3 className="font-medium text-gray-600 mb-3">Alle transaktioner er sikre og krypterede.</h3>
       <div className="border border-inputBorder rounded-md p-4">
