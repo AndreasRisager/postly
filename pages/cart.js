@@ -47,7 +47,7 @@ export default function Cart({ announcement }) {
                           <a className="inline-block hover:underline">{item.title}</a>
                         </Link>
                       </h3>
-                      <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap">
+                      <p className="text-textColor pb-1 md:text-sm italic line-clamp-2">
                         {item.description}
                       </p>
                       <p className="text-textColor pb-1 md:text-sm italic whitespace-pre-wrap">

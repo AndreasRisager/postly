@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 
 export default function FilterShop({
   open,
@@ -10,8 +11,15 @@ export default function FilterShop({
   priceLimit,
   setPriceLimit,
 }) {
+  const router = useRouter();
+  const searchRef = useRef();
+
   useEffect(() => {
     setFiltered(products);
+    if (router.query.search && searchRef.current) {
+      searchRef.current.focus();
+      history.replaceState(null, null, location.pathname);
+    }
     if (category) {
       const filteredByCategory = products.filter((item) => {
         const categoryName = item.categories.map((category) => category.name);
@@ -31,19 +39,36 @@ export default function FilterShop({
     }
   }, [setFiltered, products, category, priceLimit]);
 
+  const search = (e) => {
+    const value = e.target.value;
+
+    if (value) {
+      setCategory(undefined);
+      setPriceLimit(undefined);
+      const results = products.filter((item) =>
+        item.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setFiltered(results);
+    } else {
+      setFiltered(products);
+    }
+  };
+
   return (
     <aside className={open ? "sm:max-w-[200px] text-filterButton" : "hidden sm:block"}>
       <div className="flex flex-col sticky top-4 gap-6">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="searchFilter" className="screenreader">
             søg
           </label>
           <input
-            type="searchFilter"
+            type="search"
             className="w-full bg-gray-100 py-1.5 px-3 rounded-md"
             name="searchFilter"
             id="searchFilter"
             placeholder="Søg"
+            onChange={search}
+            ref={searchRef}
           />
         </form>
         <div className="flex flex-col items-start">

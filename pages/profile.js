@@ -36,22 +36,17 @@ function Profile({ announcement }) {
       <Layout title="Profil">
         {status !== "authenticated" && <h1 className="text-2xl text-center my-40">Loading...</h1>}
         {session && (
-          <div className="flex flex-col sm:flex-row gap-8 my-10 max-w-5xl mx-auto">
-            <aside className="sm:max-w-[250px]">
-              <div className="flex items-center mb-6 truncate">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <Image
-                    src={session.user?.image}
-                    height="48"
-                    width="48"
-                    alt={"profile pic of " + session.user?.data?.username}
-                  />
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-8 my-10 max-w-5xl mx-auto">
+            <aside className="sm:w-[250px] flex-shrink-0">
+              <div className="flex items-center mb-6">
+                <div className="h-12 w-12 shrink-0 rounded-xl bg-primaryColor text-white font-semibold text-xl flex items-center justify-center uppercase outline outline-2 outline-black">
+                  {session?.user?.data?.username[0]}
                 </div>
                 <div className="ml-2 truncate">
                   <h2 className="text-base text-black font-medium truncate capitalize">
                     {session.user?.data?.username}
                   </h2>
-                  <p className="text-sm text-black truncate">{session.user?.email}</p>
+                  <p className="text-sm text-black truncate">{session.user?.data?.email}</p>
                 </div>
               </div>
               <div className="border border-inputBorder rounded-md">
@@ -104,7 +99,7 @@ function Profile({ announcement }) {
                 </Link>
               </div>
             </aside>
-            <section className="flex-1">
+            <section className="flex-grow">
               {(page === "1" || !page) && <Orders />}
               {page === "2" && <Address />}
               {page === "3" && <Account />}

@@ -1,5 +1,5 @@
-import { ViewGridIcon } from "@heroicons/react/solid";
-import { ViewListIcon } from "@heroicons/react/outline";
+// import { ViewGridIcon } from "@heroicons/react/solid";
+// import { ViewListIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import Announcement from "../components/layout/Announcement";
 import Layout from "../components/layout/Layout";
@@ -12,10 +12,10 @@ import { getCategories } from "../lib/getCategories";
 
 function Shop({ announcement, products, categories }) {
   const [filtered, setFiltered] = useState([]);
-  // const [listView, setListView] = useState(false);
-  const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [priceLimit, setPriceLimit] = useState(undefined);
   const [category, setCategory] = useState(undefined);
+  const [openFilterMenu, setOpenFilterMenu] = useState(false);
+  // const [listView, setListView] = useState(false);
 
   return (
     <>

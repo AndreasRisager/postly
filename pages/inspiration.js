@@ -7,7 +7,7 @@ function Inspiration({ announcement }) {
     <>
       <Announcement announcement={announcement} />
       <Layout title="Find Inspiration">
-        <h1 className="text-center text-xl py-40">Find Inspiration er ikke tilgængelig lige nu</h1>
+        <h1 className="text-center text-xl py-40">Find Inspiration er ikke tilgængelig endnu</h1>
       </Layout>
     </>
   );

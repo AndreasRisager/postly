@@ -27,7 +27,7 @@ export default function ImageSlider({ slides }) {
             return (
               <div key={slide.id}>
                 <article
-                  className="flex flex-wrap sm:flex-nowrap gap-4 sm:items-center my-4"
+                  className="flex flex-wrap sm:flex-nowrap gap-4 lg:gap-10 sm:items-center my-4"
                   key={slide.id}>
                   <div className="aspect-square rounded-md overflow-hidden w-full sm:w-1/2 sm:order-1 relative">
                     <Image

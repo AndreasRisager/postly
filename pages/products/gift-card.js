@@ -7,7 +7,7 @@ function giftCard({ announcement }) {
     <>
       <Announcement announcement={announcement} />
       <Layout title="Gavekort">
-        <h1 className="text-center text-xl py-40">Gavekort er ikke tilgængelig lige nu</h1>
+        <h1 className="text-center text-xl py-40">Gavekort er ikke tilgængelig endnu</h1>
       </Layout>
     </>
   );

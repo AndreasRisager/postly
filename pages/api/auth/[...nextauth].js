@@ -1,11 +1,28 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    CredentialsProvider({
+      name: "credentials",
+      async authorize(credentials) {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/local`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ identifier: credentials.email, password: credentials.password }),
+        });
+
+        if (response.ok) {
+          const user = await response.json();
+          return user;
+        } else {
+          return null;
+        }
+      },
     }),
   ],
   secret: `${process.env.NEXTAUTH_SECRET}`,
@@ -13,15 +30,10 @@ export default NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    jwt: async ({ token, user, account }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account.access_token}`
-        );
-        const data = await response.json();
-
-        token.jwt = data.jwt;
-        token.id = data.user.id;
+        token.jwt = user.jwt;
+        token.id = user.user.id;
       }
       return Promise.resolve(token);
     },

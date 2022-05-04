@@ -8,11 +8,13 @@ import { getProductBySlug } from "../../lib/getProductBySlug";
 import { getProductVariations } from "../../lib/getProductVariations";
 import { getProducts } from "../../lib/getProducts";
 import InputField from "../../components/layout/InputField";
+import Link from "next/link";
 
 function Product({ product, announcement, frames, sizes }) {
   const { addToCart } = useCart();
   const [errors, setErrors] = useState([]);
   const [productVariant, setProductVariant] = useState({});
+  const [addedToCart, setAddedToCart] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -81,7 +83,7 @@ function Product({ product, announcement, frames, sizes }) {
               }
               kr`}
             </p>
-            <p className="mb-3">{product.description}</p>
+            <p className="mb-3 whitespace-pre-wrap">{product.description}</p>
             <form onSubmit={handleSubmit} noValidate>
               {product.type === "plakat" && (
                 <>
@@ -206,10 +208,26 @@ function Product({ product, announcement, frames, sizes }) {
                 ))}
               <button
                 className="text-white bg-primaryColor font-medium py-3 w-full uppercase rounded"
-                type="submit">
-                tilføj til kurv
+                type="submit"
+                onClick={() => setAddedToCart(true)}>
+                {addedToCart ? "Tilføjet til kurv" : "tilføj til kurv"}
               </button>
             </form>
+            <div
+              className={`flex justify-between mt-3 transition-all duration-300 ease-out ${
+                addedToCart ? "scale-x-100" : "scale-x-0"
+              }`}>
+              <Link href="/shop">
+                <a className="border truncate border-black text-black uppercase w-full text-center text-md p-2">
+                  Fortsæt indkøb
+                </a>
+              </Link>
+              <Link href="/cart">
+                <a className="bg-black truncate text-white uppercase w-full text-center text-md p-2">
+                  Til indkøbskurv
+                </a>
+              </Link>
+            </div>
           </div>
         </section>
       </Layout>

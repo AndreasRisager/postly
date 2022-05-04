@@ -1,5 +1,4 @@
-import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
-import React, { useState } from "react";
+import React from "react";
 
 const InputField = ({
   children,
@@ -13,8 +12,6 @@ const InputField = ({
   infoText,
   ...rest
 }) => {
-  const [open, setOpen] = useState(false);
-
   const inputFocus = (e) => {
     e.target.parentNode.classList.add(
       `${!blue && "border-checkoutActiveColor"}`,
@@ -55,20 +52,6 @@ const InputField = ({
         onFocus={inputFocus}
         onBlur={inputRemoveFocus}
       />
-      {disabled && infoText && (
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          onBlur={() => setOpen(false)}
-          className="absolute right-1 top-1.5">
-          {open && (
-            <div className="absolute bottom-6 right-0 bg-white border border-black rounded-md p-1 w-[200px] cursor-default">
-              {infoText}
-            </div>
-          )}
-          <DotsCircleHorizontalIcon className="w-5 h-5 text-red-700" />
-        </button>
-      )}
     </div>
   );
 };

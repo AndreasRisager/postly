@@ -39,11 +39,6 @@ export default function Payment({ state, prevStep, setStep, session }) {
 
     if (!stripe || !elements) return;
 
-    if (!session) {
-      setStatusMessage("Du er ikke logget ind");
-      return;
-    }
-
     if (showBillingForm) {
       if (e.target.country.value === "") {
         e.target.country.focus();
@@ -114,10 +109,9 @@ export default function Payment({ state, prevStep, setStep, session }) {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/`, {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + session.jwt,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cart, checkout: state, user: session.id }),
+        body: JSON.stringify({ cart, checkout: state }),
       });
 
       if (!response.ok) {
@@ -153,13 +147,11 @@ export default function Payment({ state, prevStep, setStep, session }) {
         return;
       }
       if (paymentIntent.status === "succeeded") {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/confirm`, {
-          method: "POST",
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/${paymentIntent.id}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + session.jwt,
           },
-          body: JSON.stringify({ paymentIntent }),
         });
         resetCart();
         router.push("/success");

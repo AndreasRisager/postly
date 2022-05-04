@@ -6,15 +6,10 @@ import Announcement from "../components/layout/Announcement";
 import Layout from "../components/layout/Layout";
 import { getAnnouncement } from "../lib/getAnnouncement";
 import Forms from "../components/checkout/Forms";
+import Link from "next/link";
 
 export default function Checkout({ announcement }) {
-  const router = useRouter();
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      router.push(`/auth/login?from=${router.asPath}`);
-    },
-  });
+  const { data: session, status } = useSession();
 
   const [step, setStep] = useState(1);
 
@@ -29,20 +24,15 @@ export default function Checkout({ announcement }) {
     <>
       <Announcement announcement={announcement} />
       <Layout className={"max-w-[60rem] mx-auto px-4 my-7"} title="Kassen">
-        {status !== "authenticated" && <h1 className="text-2xl text-center my-40">Loading...</h1>}
-        {session && (
-          <>
-            <h1 className="text-2xl font-semibold mb-1">Kassen</h1>
-            <Breadcrumb step={step} setStep={setStep} />
-            <Forms
-              session={session}
-              step={step}
-              setStep={setStep}
-              nextStep={nextStep}
-              prevStep={prevStep}
-            />
-          </>
-        )}
+        <h1 className="text-2xl font-semibold mb-1">Kassen</h1>
+        <Breadcrumb step={step} setStep={setStep} />
+        <Forms
+          session={session}
+          step={step}
+          setStep={setStep}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       </Layout>
     </>
   );

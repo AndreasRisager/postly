@@ -30,21 +30,18 @@ export default function SiteHeader() {
             </a>
           </Link>
           <div className="flex justify-end items-center gap-3">
-            <button aria-label="open search">
-              <SearchIcon className="h-6 w-6" />
-            </button>
+            <Link href="/shop?search=true">
+              <a aria-label="open search">
+                <SearchIcon className="h-6 w-6" />
+              </a>
+            </Link>
 
             <Link href="/profile">
               <a>
-                {session?.user?.image ? (
-                  <div className="h-7 w-7 rounded-full overflow-hidden border-2 border-[#000]">
-                    <Image
-                      src={session.user.image}
-                      height="28"
-                      width="28"
-                      alt={"profile pic of " + session.user.name}
-                    />
-                  </div>
+                {session ? (
+                  <p className="h-6 w-6 rounded-full bg-primaryColor text-white text-md font-medium flex items-center justify-center uppercase outline outline-2 outline-black">
+                    {session?.user?.data?.username[0]}
+                  </p>
                 ) : (
                   <UserIcon className="h-6 w-6 cursor-pointer" />
                 )}

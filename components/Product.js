@@ -11,6 +11,7 @@ export default function Product({ product }) {
             alt={product.title}
             width={237.25}
             height={237.25}
+            quality={50}
             layout="responsive"
             objectFit="cover"
           />

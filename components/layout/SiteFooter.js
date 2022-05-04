@@ -37,21 +37,6 @@ export default function SiteFooter() {
             2650 Hvidovre
           </p>
           <p className="mb-5">CVR. nr. 39744961</p>
-          <p className="uppercase">Presse </p>
-          <a
-            href="mailto:postlydk@gmail.com"
-            className="underline"
-            title="kontakt os via e-mail"
-            aria-describedby="a11y-external-message">
-            postlydk@gmail.com
-          </a>
-          <a
-            href="tel:+4542191325"
-            className="underline"
-            title="kontakt os via telefon"
-            aria-describedby="a11y-external-message">
-            tlf: 42191325
-          </a>
         </div>
         <div className="flex-1 basis-full sm:basis-1/2 lg:basis-1/4 flex flex-col py-4 pr-4">
           <h3 className="text-base font-semibold mb-6 uppercase" id="kundeservice">

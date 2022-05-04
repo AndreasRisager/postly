@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import CheckboxField from "../layout/CheckboxField";
@@ -68,31 +69,33 @@ export default function Information({ handleChange, state, nextStep, session }) 
 
     let updateData = {};
 
-    if (
-      (saveInformation && state.country !== session.user.data.country) ||
-      state.firstname !== session.user.data.firstname ||
-      state.lastname !== session.user.data.lastname ||
-      state.address1 !== session.user.data.address1 ||
-      state.address2 !== session.user.data.address2 ||
-      state.zip !== session.user.data.zip ||
-      state.city !== session.user.data.city ||
-      state.city !== session.user.data.city ||
-      state.phone !== session.user.data.phone
-    ) {
-      updateData = {
-        ...updateData,
-        country: state.country,
-        firstname: state.firstname,
-        lastname: state.lastname,
-        address1: state.address1,
-        address2: state.address2,
-        zip: state.zip,
-        city: state.city,
-        phone: state.phone,
-      };
+    if (session && saveInformation) {
+      if (
+        state.country !== session.user.data.country ||
+        state.firstname !== session.user.data.firstname ||
+        state.lastname !== session.user.data.lastname ||
+        state.address1 !== session.user.data.address1 ||
+        state.address2 !== session.user.data.address2 ||
+        state.zip !== session.user.data.zip ||
+        state.city !== session.user.data.city ||
+        state.city !== session.user.data.city ||
+        state.phone !== session.user.data.phone
+      ) {
+        updateData = {
+          ...updateData,
+          country: state.country,
+          firstname: state.firstname,
+          lastname: state.lastname,
+          address1: state.address1,
+          address2: state.address2,
+          zip: state.zip,
+          city: state.city,
+          phone: state.phone,
+        };
+      }
     }
 
-    if (!saveInformation) {
+    if (session && !saveInformation) {
       updateData = {
         ...updateData,
         country: "",
@@ -116,7 +119,7 @@ export default function Information({ handleChange, state, nextStep, session }) 
       });
     }
 
-    if (saveInformation && Object.keys(updateData).length > 0) {
+    if (session && saveInformation && Object.keys(updateData).length > 0) {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
         method: "PUT",
         headers: {
@@ -138,10 +141,39 @@ export default function Information({ handleChange, state, nextStep, session }) 
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="text-xl font-medium text-black mb-4">Kontaktinformation</h2>
-      <InputField type="email" id="email" value={state.email} onChange={handleChange}>
-        Mail
-      </InputField>
+      <div className="flex gap-1 justify-between items-center flex-wrap mb-4">
+        <h2 className="text-xl font-medium text-black">Kontaktinformation</h2>
+        {!session && (
+          <p className="text-black text-md">
+            Har du allerede en konto?{" "}
+            <Link href="/auth/login?from=checkout">
+              <a className="text-checkoutActiveColor">Log ind</a>
+            </Link>
+          </p>
+        )}
+      </div>
+
+      {session ? (
+        <div className="flex gap-4 py-2">
+          <div className="h-12 w-12 shrink-0 rounded-xl bg-primaryColor text-white font-semibold text-xl flex items-center justify-center uppercase outline outline-2 outline-black">
+            {session?.user?.data?.username[0]}
+          </div>
+          <p className="text-black truncate">
+            {session?.user?.data?.username} ({session?.user?.data?.email})
+            <br />
+            <button
+              type="button"
+              onClick={() => signOut({ callbackUrl: "/checkout" })}
+              className="text-checkoutActiveColor font-normal">
+              Log ud
+            </button>
+          </p>
+        </div>
+      ) : (
+        <InputField type="email" id="email" value={state.email} onChange={handleChange}>
+          Mail
+        </InputField>
+      )}
       <CheckboxField
         id="checkout-newsletter"
         defaultChecked={acceptNewsletter}

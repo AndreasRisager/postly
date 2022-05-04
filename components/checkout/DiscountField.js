@@ -11,12 +11,15 @@ export default function DiscountField({ setState }) {
     setState((prev) => ({ ...prev, discount: "" }));
     setDiscountError("");
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/discounts/${discountInput}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/discounts/${discountInput.toLowerCase()}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setState((prev) => ({ ...prev, discount: data }));
