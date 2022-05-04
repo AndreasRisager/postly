@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
@@ -47,14 +46,18 @@ export default NextAuth({
           Authorization: "Bearer " + token.jwt,
         },
       });
-      const data = await response.json();
 
-      if (data) {
+      if (response.ok) {
+        const data = await response.json();
+
         session.jwt = token.jwt;
         session.id = token.id;
         session.user = { ...session.user, data };
+        return Promise.resolve(session);
+      } else {
+        session = null;
+        return Promise.resolve(session);
       }
-      return Promise.resolve(session);
     },
   },
   pages: {

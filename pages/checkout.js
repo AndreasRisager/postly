@@ -7,7 +7,7 @@ import { getAnnouncement } from "../lib/getAnnouncement";
 import Forms from "../components/checkout/Forms";
 
 export default function Checkout({ announcement }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [step, setStep] = useState(1);
 
