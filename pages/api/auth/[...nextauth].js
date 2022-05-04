@@ -49,9 +49,11 @@ export default NextAuth({
       });
       const data = await response.json();
 
-      session.jwt = token.jwt;
-      session.id = token.id;
-      session.user = { ...session.user, data };
+      if (data) {
+        session.jwt = token.jwt;
+        session.id = token.id;
+        session.user = { ...session.user, data };
+      }
       return Promise.resolve(session);
     },
   },
