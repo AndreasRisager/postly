@@ -47,14 +47,14 @@ export default function Register() {
     });
 
     if (!response.ok) {
-      setStatusMessage("Denne email er allerede taget");
+      setStatusMessage("Email eller brugernavn er allerede taget.");
     }
 
     if (response.ok) {
       signIn("credentials", {
         email,
         password,
-        callbackUrl: `${from ? from : ""}`,
+        callbackUrl: `${from ? "/" + from : "/"}`,
         redirect: false,
       });
     }
