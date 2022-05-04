@@ -1,12 +1,10 @@
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import Breadcrumb from "../components/checkout/Breadcrumb";
 import Announcement from "../components/layout/Announcement";
 import Layout from "../components/layout/Layout";
 import { getAnnouncement } from "../lib/getAnnouncement";
 import Forms from "../components/checkout/Forms";
-import Link from "next/link";
 
 export default function Checkout({ announcement }) {
   const { data: session, status } = useSession();

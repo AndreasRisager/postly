@@ -37,7 +37,7 @@ export default function FilterShop({
       const filtered = products.filter((item) => item.price <= priceLimit);
       setFiltered(filtered);
     }
-  }, [setFiltered, products, category, priceLimit]);
+  }, [setFiltered, products, category, priceLimit, router.query.search]);
 
   const search = (e) => {
     const value = e.target.value;
