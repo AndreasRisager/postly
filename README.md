@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Postly
 
-## Getting Started
+This website is created with Next.js, TailwindCSS, Strapi & Stripe.
 
-First, run the development server:
+### Home page
+![image](https://user-images.githubusercontent.com/67141497/202329121-098c183f-2305-439a-81a4-878841dd5716.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Shop page
+![image](https://user-images.githubusercontent.com/67141497/202329284-944d5488-b8dd-49c6-8709-c9d27136f91e.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Product page
+![image](https://user-images.githubusercontent.com/67141497/202325715-2ab56c68-d1ea-42d4-86da-cc44914c3280.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Cart page
+![image](https://user-images.githubusercontent.com/67141497/202325940-35171f01-4165-4048-915c-436171b75dd0.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Checkout page
+![image](https://user-images.githubusercontent.com/67141497/202326131-ee4e8eb2-06cb-4a99-9d9e-84af99034bb6.png)
+![image](https://user-images.githubusercontent.com/67141497/202327265-f49adf07-7e34-4f6b-90b5-6e33a69173c8.png)
+![image](https://user-images.githubusercontent.com/67141497/202327398-90dcfa99-81dc-4805-a1c0-62a89b0fab4b.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Success page
+![image](https://user-images.githubusercontent.com/67141497/202327478-5309b966-d43c-47bd-9ac9-0f61b36c1e9b.png)
 
-## Learn More
+### Login page
+![image](https://user-images.githubusercontent.com/67141497/202327591-2c6eabc4-bc6f-45ed-9809-21c270919cb9.png)
 
-To learn more about Next.js, take a look at the following resources:
+### Register page
+![image](https://user-images.githubusercontent.com/67141497/202327693-e1a031ee-d629-48c3-85af-ded66a81bbec.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Profile page
+![image](https://user-images.githubusercontent.com/67141497/202328316-2fb4c645-06c6-4f69-ac22-4094429159c1.png)
+![image](https://user-images.githubusercontent.com/67141497/202328346-a5f38789-40b0-432f-8773-d5b1126348fc.png)
